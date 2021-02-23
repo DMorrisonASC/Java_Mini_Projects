@@ -21,34 +21,28 @@ public class Grades {
         do {
             gradeInput = scan.nextDouble();
 //            Check if number is between 0-100. If not, keep asking
-            while (true) {
-                if (!(0 <= gradeInput && gradeInput <= 100)) {
+            while (!(0 <= gradeInput && gradeInput <= 100)) {
                     System.out.println("That's not a valid input! Pick another number: ");
                     gradeInput = scan.nextDouble();
-                } else {
-                    break;
-                }
             }
             totalGrades = totalGrades + gradeInput;
             numOfGrades++;
             System.out.println("Add another grade? \"Yes\" or \"No\"?");
             keepGoing = scan.next().toLowerCase();
 
-            while (true) {
-                if (keepGoing.startsWith("y")) {
-                    System.out.println("Put another grade: ");
-                    break;
-                }
-                else if (keepGoing.startsWith("n")){
-                    finalGrade = (totalGrades / numOfGrades);
-                    System.out.println("Your grade average is " + finalGrade);
-                    continueLoop = false;
-                    break;
-                }
-                else {
-                    System.out.println("That's not \"Yes\" or \"No\". ");
-                    scan.nextLine();
-                }
+            while (!(keepGoing.startsWith("y") || keepGoing.startsWith("n"))) {
+                System.out.println("That's not \"Yes\" or \"No\". ");
+                keepGoing = scan.next().toLowerCase();
+            }
+
+            if (keepGoing.startsWith("y")) {
+                System.out.println("Put in another grade: ");
+                continueLoop = true;
+            }
+            else {
+                finalGrade = (totalGrades / numOfGrades);
+                System.out.println("Your grade average is " + finalGrade);
+                continueLoop = false;
             }
         }
 //      Keep asking until keepGoing = false
