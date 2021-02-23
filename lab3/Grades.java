@@ -14,37 +14,44 @@ public class Grades {
         double totalGrades = 0;
         double numOfGrades = 0;
         double finalGrade = 0;
-        boolean continueLoop;
+        boolean continueLoop = true;
         String keepGoing;
+        System.out.println("This is a grade average calculator. Only use numbers from 0-100!");
 //        Ask user to input grades(0-100).
         do {
-            System.out.println("This is a grade average calculator. Only use numbers from 0-100!");
             gradeInput = scan.nextDouble();
-            if (0 <= gradeInput && gradeInput <= 100) {
-                totalGrades = totalGrades + gradeInput;
-                numOfGrades++;
+//            Check if number is between 0-100. If not, keep asking
+            while (true) {
+                if (!(0 <= gradeInput && gradeInput <= 100)) {
+                    System.out.println("That's not a valid input! Pick another number: ");
+                    gradeInput = scan.nextDouble();
+                } else {
+                    break;
+                }
             }
-
-            else {
-                System.out.println("That's not a valid input!");
-                continue;
-            }
+            totalGrades = totalGrades + gradeInput;
+            numOfGrades++;
             System.out.println("Add another grade? \"Yes\" or \"No\"?");
             keepGoing = scan.next().toLowerCase();
 
-            if (keepGoing.startsWith("y")) {
-                continue;
+            while (true) {
+                if (keepGoing.startsWith("y")) {
+                    System.out.println("Put another grade: ");
+                    break;
+                }
+                else if (keepGoing.startsWith("n")){
+                    finalGrade = (totalGrades / numOfGrades);
+                    System.out.println("Your grade average is " + finalGrade);
+                    continueLoop = false;
+                    break;
+                }
+                else {
+                    System.out.println("That's not \"Yes\" or \"No\". ");
+                    scan.nextLine();
+                }
             }
-            else if (keepGoing.startsWith("n")) {
-                finalGrade = (totalGrades / numOfGrades);
-                System.out.println("Your grade average is " + finalGrade);
-                break;
-            }
-//            else {
-//
-//            }
         }
 //      Keep asking until keepGoing = false
-        while (true);
+        while (continueLoop);
     }
 }
