@@ -11,6 +11,9 @@ public class Counter {
 //        Create Variables
         Scanner scan = new Scanner(System.in); // Scanner for user input
         String msgInput = new String();
+        int letterCount = 0;
+        int numberCount = 0;
+        int specCharCount = 0;
 
         System.out.println("This is message counter! It counts g the number of letters, digits, whitespaces and special " +
                 "characters in a message");
@@ -24,15 +27,21 @@ public class Counter {
         for (int i = 0; i < msgInput.length(); i++) {
             char letter = msgInput.charAt(i);
             String letterToString = Character.toString(letter);
+//          Return True if char is a NOT special char.
+            Boolean isNotSpecChar = !(letterToString.matches("[^a-zA-Z0-9]"));
+//           If its NOT a special character count it;
+            if(isNotSpecChar) {
 //
-            Boolean isSpecChar = letterToString.matches("[^a-zA-Z0-9]");
-            if(isSpecChar) {
-//                System.out.println("Not Special Char!");
+                letterCount++;
+
             }
+//            if its a special character count it;
             else {
-//                System.out.println("Special Char!");
+                specCharCount++;
             }
-//            System.out.println(letter);
         }
+        System.out.println("There are " + letterCount + "letters");
+        System.out.println("There are " + numberCount + "numbers");
+        System.out.println("There are " + specCharCount + "special characters");
     }
 }
