@@ -1,8 +1,7 @@
 /* Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
  Date: 3/1/2021
  Instructor: Professor Hellsing
- Description: a loop that iterates through the sentence(msgInput) and checks there are any letters, numbers, whitespaces or special character.
- It counts and prints the amount
+ Description: Program converts DNA to RNA
 */
 
 import java.util.Scanner;
