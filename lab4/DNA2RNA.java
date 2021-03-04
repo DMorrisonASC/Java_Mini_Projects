@@ -15,7 +15,7 @@ public class DNA2RNA {
         String convertToRNA = convertDNA(getDNA); // If yes, convert it to RNA and store new string
 //        If DNA is valid(contains only "A", "C", "G" or "T", output the DNA and RNA sequence.
         if (checkDNA == true) {
-            System.out.println("The DNA sequence " + getDNA + " is converted to " + convertToRNA);
+            System.out.println("The DNA sequence " + getDNA + ", when converted to RNA is " + convertToRNA);
         }
 //        If not valid, exit program
         else {
