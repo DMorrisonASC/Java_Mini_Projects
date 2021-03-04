@@ -18,21 +18,23 @@ public class Height {
 //            scan.nextLine();
 //        }
         int[] newHeightArray = getHeight(heightArray);
+        double averageHeight = getAvgHeight(newHeightArray);
+        printEveryThing(newHeightArray, averageHeight);
 
-        for ( int num : heightArray){
-            int total = 0;
-            int count = 0;
+//        for ( int num : heightArray){
+//            int total = 0;
+//            int count = 0;
+//
+//            count += 1;
+//            total += num;
+//
+//            double avgHeight = total / count;
+//        }
 
-            count += 1;
-            total += num;
-
-            double avgHeight = total / count;
-        }
-
-        for (int num : heightArray ) {
-            System.out.println(num);
-        }
-        System.out.println(heightArray[1]);
+//        for (int num : heightArray ) {
+//            System.out.println(num);
+//        }
+//        System.out.println(heightArray[1]);
 
     }
     public static int[] getHeight(int[] heightArray) {
@@ -44,6 +46,22 @@ public class Height {
         }
         return heightArray;
     }
-    public static int 
-
+    public static double getAvgHeight(int[] heightArray) {
+        double avgHeight = 0;
+        double total = 0;
+        double count = 0;
+        for ( int num : heightArray){
+            count += 1.0;
+            total += num;
+        }
+        avgHeight = total / count;
+        return avgHeight;
+    }
+    public static void printEveryThing(int[] heightArray, double averageHeight){
+        System.out.println("The heights in the class are: ");
+        for (int num : heightArray ) {
+            System.out.println(num);
+        }
+        System.out.println("So the average height is " + averageHeight);
+    }
 }
