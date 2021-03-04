@@ -9,36 +9,17 @@ room, determine the average of the heights, and then output the average along wi
 public class Height {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in); // Scan for user input
-        int numOfPeople = 8;
+        final int numOfPeople = 8; // Set constant for size of array
         int[] heightArray  = new int[numOfPeople];
 
-//        for (int i = 0; i < heightArray.length; i++) {
-//            int heightInput = scan.nextInt();
-//            heightArray[i] = heightInput;
-//            scan.nextLine();
-//        }
-        int[] newHeightArray = getHeight(heightArray);
-        double averageHeight = getAvgHeight(newHeightArray);
-        printEveryThing(newHeightArray, averageHeight);
-
-//        for ( int num : heightArray){
-//            int total = 0;
-//            int count = 0;
-//
-//            count += 1;
-//            total += num;
-//
-//            double avgHeight = total / count;
-//        }
-
-//        for (int num : heightArray ) {
-//            System.out.println(num);
-//        }
-//        System.out.println(heightArray[1]);
-
+        int[] newHeightArray = getHeight(heightArray); // Prompts user for heights
+        double averageHeight = getAvgHeight(newHeightArray); // Uses the new array to get average heights
+        printEveryThing(newHeightArray, averageHeight); // Print all inputted heights and avg heights
     }
     public static int[] getHeight(int[] heightArray) {
         Scanner scan = new Scanner(System.in); // Scan for user input
+        System.out.println("Please enter eight heights in inches: ");
+//        Ask for a height 8 times and check value of each slot of the array each input
         for (int i = 0; i < heightArray.length; i++) {
             int heightInput = scan.nextInt();
             heightArray[i] = heightInput;
@@ -46,6 +27,7 @@ public class Height {
         }
         return heightArray;
     }
+//    Get average height by dividing total heights by the number of heights (total/8)
     public static double getAvgHeight(int[] heightArray) {
         double avgHeight = 0;
         double total = 0;
@@ -57,6 +39,8 @@ public class Height {
         avgHeight = total / count;
         return avgHeight;
     }
+//    Receive the array and average height variables(newHeightArray, averageHeight)
+//    Print results!
     public static void printEveryThing(int[] heightArray, double averageHeight){
         System.out.println("The heights in the class are: ");
         for (int num : heightArray ) {
