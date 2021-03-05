@@ -11,9 +11,10 @@ public class DNA2RNA {
     public static void main(String[] args) {
         String getDNA = getDNASeq(); // Get user's input
         boolean checkDNA = checkDNASeq(getDNA); // Check if it's a valid string
-        String convertToRNA = convertDNA(getDNA); // If yes, convert it to RNA and store new string
+        String convertToRNA = new String(); // placeholder variable for when RNA sequence is converted to DNA
 //        If DNA is valid(contains only "A", "C", "G" or "T", output the DNA and RNA sequence.
         if (checkDNA == true) {
+            convertToRNA = getDNA.replace('T', 'U');; // If yes, convert it to RNA and store new string
             System.out.println("The DNA sequence " + getDNA + ", when converted to RNA is " + convertToRNA);
         }
 //        If not valid, exit program
@@ -23,7 +24,7 @@ public class DNA2RNA {
         }
     }
 
-    public static String getDNASeq(){
+    public static String getDNASeq() {
         Scanner scan = new Scanner(System.in); // Scanner for user input
         String DNAInput = new String();
         System.out.println("What's the DNA sequence?: ");
@@ -49,8 +50,5 @@ public class DNA2RNA {
         }
         return validDNASeq;
     }
-    public static String convertDNA(String DNA) {
-        String RNASeq = DNA.replace('T', 'U');
-        return RNASeq;
-    }
+
 }
