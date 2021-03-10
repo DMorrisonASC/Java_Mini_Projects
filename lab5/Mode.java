@@ -35,10 +35,14 @@ public class Mode {
                 modeCounter[ranNum] = modeCounter[ranNum] + 1;
             }
         }
-        int mode;
+
+        int mode = 0; //        Set var that stores the modes
+        // Stores the highest amount of a times a number is called. Ex. if 6 appears 12 times, the value of the mode(12) is stored.
         int timesModeIsRepeated = modeCounter[0];
         int [] allModes = new int[1];
 
+//      Loop find stores the highest amount of a times a number is called and sets the mode.
+//      Ex. if 6 appears 12 times, the value of the mode is stored. `timesModeIsRepeated` = 12 then `mode` = 6 .
         for (int i = 0; i < modeCounter.length; i++) {
 
             if (timesModeIsRepeated < modeCounter[i]) {
@@ -50,18 +54,25 @@ public class Mode {
                 timesModeIsRepeated = modeCounter[i];
                 allModes[0] = mode;
             }
-//            If there are multiple modes, store them
-            else if (timesModeIsRepeated == modeCounter[i]) {
+//            If there are multiple modes and it's not the same mode.
+//            Ex. If 1 appears 3x and 2 appears 2x, both are stored in `allModes`.
+//            If not, don't store it.
+//            This prevents 0 from being stored in `allModes` twice.
+            else if (timesModeIsRepeated == modeCounter[i] && mode != i) {
                 allModes = Arrays.copyOf(allModes, allModes.length + 1);
                 allModes[allModes.length - 1] = i;
             }
         }
+
 //        for (int i = 0; i < modeCounter.length; i++) {
 //            System.out.println(i + " appeared " + modeCounter[i] + " times!");
 //        }
 
+//        Output final message!
+//        loop prints in grid format
         for (int i = 0; i < multiArray.length; i++) {
             for (int j = 0; j < multiArray[i].length; j++) {
+//                if number is a 10, take an extra whitespace to maintain grid.
                 if (multiArray[i][j] == 10) {
                     System.out.print(" " + multiArray[i][j] + "|");
                 }
@@ -69,9 +80,10 @@ public class Mode {
                     System.out.print(" " + multiArray[i][j] + " |");
                 }
             }
-            System.out.println();
+
+            System.out.println(); // Space out the numbers to create separate rows
         }
-        System.out.println();
+        System.out.println(); // Space for formatting
         System.out.println("The following mode(s) is/are: ");
         for (int num: allModes) {
             System.out.println(num);
