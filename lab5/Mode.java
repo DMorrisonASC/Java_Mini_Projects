@@ -33,37 +33,37 @@ public class Mode {
                 multiArray[i][j] = ranNum;
 //                Count how many times a number appears(find the mode)
                 modeCounter[ranNum] = modeCounter[ranNum] + 1;
-//                System.out.println("Add " + multiArray[i][j]);
             }
         }
-        int mode = 0;
-        int timesRepeated = 0;
+        int mode;
+        int timesModeIsRepeated = modeCounter[0];
         int [] allModes = new int[1];
 
         for (int i = 0; i < modeCounter.length; i++) {
 
-            if (mode < modeCounter[i]) {
+            if (timesModeIsRepeated < modeCounter[i]) {
 //                clear array first
                 allModes = new int[1];
 //                Set mode to the new largest number
                 mode = i;
-//                allModes = Arrays.copyOf(allModes, allModes.length + 1);
-//                allModes[allModes.length - 1] = mode;
-//                allModes = Arrays.copyOf(allModes, allModes.length);
+//                Set timesModeIsRepeated to the highest value that appeared so far
+                timesModeIsRepeated = modeCounter[i];
                 allModes[0] = mode;
-                timesRepeated = modeCounter[i];
             }
 
-            else if (mode == modeCounter[i]) {
+            else if (timesModeIsRepeated == modeCounter[i]) {
                 allModes = Arrays.copyOf(allModes, allModes.length + 1);
                 allModes[allModes.length - 1] = i;
             }
         }
-        System.out.println(mode + "appeared " + timesRepeated);
+//        System.out.println(mode + "appeared " + timesRepeated);
 
         for (int num: allModes) {
-            System.out.println(num);
+            System.out.println("Mode: " + num);
         }
 
+        for (int i = 0; i < modeCounter.length; i++) {
+            System.out.println(i + " appeared " + modeCounter[i] + " times!");
+        }
     }
 }
