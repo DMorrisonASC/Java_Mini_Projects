@@ -6,7 +6,7 @@ import java.util.Arrays;
 /* Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
  Date: 3/9/2021
  Instructor: Professor Hellsing
- Description:
+ Description: Creates X amount of rows and columns based on user input. Prints these numbers in a grid format and outputs the mode(s)
 */
 import java.lang.Math;
 public class Mode {
