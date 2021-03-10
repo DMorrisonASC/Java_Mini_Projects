@@ -60,9 +60,9 @@ public class Mode {
             }
         }
         System.out.println(mode + "appeared " + timesRepeated);
+
         for (int num: allModes) {
             System.out.println(num);
-
         }
 
     }
