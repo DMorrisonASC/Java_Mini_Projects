@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.String;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 /* Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
  Date: 3/9/2021
@@ -33,28 +33,37 @@ public class Mode {
                 multiArray[i][j] = ranNum;
 //                Count how many times a number appears(find the mode)
                 modeCounter[ranNum] = modeCounter[ranNum] + 1;
-                System.out.println("Add " + multiArray[i][j]);
+//                System.out.println("Add " + multiArray[i][j]);
             }
         }
         int mode = 0;
         int timesRepeated = 0;
-        int [] allModes = new int[0];
+        int [] allModes = new int[1];
 
         for (int i = 0; i < modeCounter.length; i++) {
 
             if (mode < modeCounter[i]) {
-                allModes = null;
+//                clear array first
+                allModes = new int[1];
+//                Set mode to the new largest number
                 mode = i;
-//                allModes.add(null);
+//                allModes = Arrays.copyOf(allModes, allModes.length + 1);
+//                allModes[allModes.length - 1] = mode;
+//                allModes = Arrays.copyOf(allModes, allModes.length);
+                allModes[0] = mode;
                 timesRepeated = modeCounter[i];
             }
 
             else if (mode == modeCounter[i]) {
-
-
+                allModes = Arrays.copyOf(allModes, allModes.length + 1);
+                allModes[allModes.length - 1] = i;
             }
         }
         System.out.println(mode + "appeared " + timesRepeated);
+        for (int num: allModes) {
+            System.out.println(num);
+
+        }
 
     }
 }
