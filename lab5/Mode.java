@@ -50,20 +50,31 @@ public class Mode {
                 timesModeIsRepeated = modeCounter[i];
                 allModes[0] = mode;
             }
-
+//            If there are multiple modes, store them
             else if (timesModeIsRepeated == modeCounter[i]) {
                 allModes = Arrays.copyOf(allModes, allModes.length + 1);
                 allModes[allModes.length - 1] = i;
             }
         }
-//        System.out.println(mode + "appeared " + timesRepeated);
+//        for (int i = 0; i < modeCounter.length; i++) {
+//            System.out.println(i + " appeared " + modeCounter[i] + " times!");
+//        }
 
-        for (int num: allModes) {
-            System.out.println("Mode: " + num);
+        for (int i = 0; i < multiArray.length; i++) {
+            for (int j = 0; j < multiArray[i].length; j++) {
+                if (multiArray[i][j] == 10) {
+                    System.out.print(" " + multiArray[i][j] + "|");
+                }
+                else {
+                    System.out.print(" " + multiArray[i][j] + " |");
+                }
+            }
+            System.out.println();
         }
-
-        for (int i = 0; i < modeCounter.length; i++) {
-            System.out.println(i + " appeared " + modeCounter[i] + " times!");
+        System.out.println();
+        System.out.println("The following mode(s) is/are: ");
+        for (int num: allModes) {
+            System.out.println(num);
         }
     }
 }
