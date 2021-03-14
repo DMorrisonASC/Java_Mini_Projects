@@ -42,9 +42,7 @@ public class Mode {
         int [] allModes = new int[1];
 
 //      Loop find stores the highest amount of a times a number is called and sets the mode.
-//      Ex. if 6 appears 12 times, the value of the mode is stored. `timesModeIsRepeated` = 12 then `mode` = 6 .
         for (int i = 0; i < modeCounter.length; i++) {
-
             if (timesModeIsRepeated < modeCounter[i]) {
 //                clear array first
                 allModes = new int[1];
@@ -63,6 +61,7 @@ public class Mode {
                 allModes[allModes.length - 1] = i;
             }
         }
+//      Ex. if 6 appears 12 times, the value of the mode is stored. `timesModeIsRepeated` = 12 then `mode` = 6 .
 
 //        for (int i = 0; i < modeCounter.length; i++) {
 //            System.out.println(i + " appeared " + modeCounter[i] + " times!");
@@ -72,13 +71,7 @@ public class Mode {
 //        loop prints in grid format
         for (int i = 0; i < multiArray.length; i++) {
             for (int j = 0; j < multiArray[i].length; j++) {
-//                if number is a 10, take an extra whitespace to maintain grid.
-                if (multiArray[i][j] == 10) {
-                    System.out.print(" " + multiArray[i][j] + "|");
-                }
-                else {
-                    System.out.print(" " + multiArray[i][j] + " |");
-                }
+                System.out.printf("%2d ", multiArray[i][j]);
             }
 
             System.out.println(); // Space out the numbers to create separate rows
