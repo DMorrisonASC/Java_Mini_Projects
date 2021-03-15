@@ -1,0 +1,34 @@
+/* Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+ Date: 3/12/2021
+ Instructor: Professor Hellsing
+ Description: A simulation of a slot machine
+*/
+import java.lang.Math;
+import java.util.Arrays;
+import java.util.Random;
+
+public class SlotMachine {
+    public static void main(String[] args) {
+//        Init all block variables
+        double playerMoney = 100;
+        double moneyInMachine = 0;
+        double bet = 1;
+        Random rand = new Random();
+
+
+        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
+        String[][] slotsArray = new String[3][3];
+//        Randomly play symbols into each slot
+        for (int i = 0; i < slotsArray.length; i++) {
+            for (int j = 0; j < slotsArray[i].length; j++) {
+                int randIndex = rand.nextInt(7);
+                slotsArray[i][j] = symbols[randIndex];
+            }
+
+        }
+//        Print the spin result
+        for (int i = 0; i < slotsArray.length; i++) {
+            System.out.println(Arrays.toString(slotsArray[i]));
+        }
+    }
+}
