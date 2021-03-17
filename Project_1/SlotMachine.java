@@ -103,7 +103,7 @@ public class SlotMachine {
     }
 
     public static boolean leaveGame(double moneyInMachine, double totalLosses, double playerMoney) {
-//        If amount of money in machine is greater than all the money they put into the machine(losses),
+//        If amount of money in machine is equal to or greater than all the money they put into the machine + bet amount lost,
 //        then they made money and won.
 //        If not, they lost money.
         if (moneyInMachine >= totalLosses) {
@@ -112,7 +112,6 @@ public class SlotMachine {
         else {
             System.out.println("You lost: $" + (moneyInMachine - totalLosses));
         }
-
         System.out.println("Current balance: $" + (playerMoney + moneyInMachine));
         System.out.println("Bye, please come again!");
         return false;
