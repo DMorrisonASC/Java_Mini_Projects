@@ -167,32 +167,42 @@ public class SlotMachine {
 //            First, check rows
             for (int i = 0; i < slotsArray.length; i++) {
                 if (slotsArray[i][0].equals(slotsArray[i][1]) && slotsArray[i][0].equals(slotsArray[i][2])) {
-                    System.out.println("3x");
+                    System.out.println("3x row");
                 }
                 else if (slotsArray[i][1].equals(slotsArray[i][0])) {
-                    System.out.println("2x");
+                    System.out.println("2x row");
                 }
                 else if (slotsArray[i][1].equals(slotsArray[i][2])) {
-                    System.out.println("2x");
+                    System.out.println("2x row");
                 }
             }
 //            Next, check columns
-//            for (int i = 0; i < slotsArray[i].length; i++) {
-//                System.out.println(i);
-//            }
             for (int i = 0; i < slotsArray.length; i++) {
                 if (slotsArray[0][i].equals(slotsArray[1][i]) && slotsArray[0][i].equals(slotsArray[2][i])) {
-                    System.out.println("3x");
+                    System.out.println("3x column");
                 }
                 else if (slotsArray[1][i].equals(slotsArray[0][i])) {
-                    System.out.println("2x");
+                    System.out.println("2x column");
                 }
                 else if (slotsArray[1][i].equals(slotsArray[2][i])) {
-                    System.out.println("2x");
+                    System.out.println("2x column");
                 }
             }
+//            Check  both diagonals
+//                1st diagonal
+            if (slotsArray[0][0].equals(slotsArray[1][1]) && slotsArray[0][0].equals(slotsArray[2][2])) {
+                System.out.println("3x diagonal");
+            }
+            else if (slotsArray[1][1].equals(slotsArray[0][0])) {
+                System.out.println("2x diagonal");
+            }
+            else if (slotsArray[1][1].equals(slotsArray[2][2])) {
+                System.out.println("2x diagonal");
+            }
+//                2nd diagonal
 
-
+            
+            
             return winsAndLosses;
         }
         else {
