@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.String;
 
 // To-do:
 //1) Print 2 digits
@@ -34,8 +35,8 @@ public class SlotMachine {
             System.out.println("You have $" + playerMoney + " on hand."); // Output money on hand
             System.out.println("Machine balance: $" + moneyInMachine);
             System.out.println("Bet amount: $" + betAmount);
-            System.out.println("You can: \nA) Add money \nB) Change bet amount \nC) Play \nD) Cash-out");
-            System.out.println("What do you want to do? Choices:");
+            System.out.println("Choices: \nA) Add money \nB) Change bet amount \nC) Play \nD) Cash-out");
+            System.out.println("What do you want to do?");
 
 //          Ask for inputs 'a', 'b', 'c' or 'd'. If it's not keep asking and looping
             choice = scan.next().toLowerCase().charAt(0);
@@ -155,6 +156,29 @@ public class SlotMachine {
                 }
                 System.out.println();
             }
+
+//            Check for any winning combinations:
+//                o Three of a kind on any single row, column, or diagonal (Payout is 3X the bet amount)
+//                o Two of a kind adjacent to each other on any single row, column, or diagonal (Payout is 2X the
+//                        bet amount)
+//                  ▪ i.e. If the row/column/diagonal had A-A-A, it must be counted as a three of a kind and
+//                not two, two of a kinds
+//                o If multiple instances of three of a kind or two of a kind exist, the payouts should be summed
+//            First, check rows
+            for (int i = 0; i < slotsArray.length; i++) {
+                if (slotsArray[i][0].equals(slotsArray[i][1]) && slotsArray[i][0].equals(slotsArray[i][2])) {
+                    System.out.println("3x");
+                }
+                else if (slotsArray[i][1].equals(slotsArray[i][0])) {
+                    System.out.println("2x");
+                }
+                else if (slotsArray[i][1].equals(slotsArray[i][2])) {
+                    System.out.println("2x");
+                }
+            }
+
+
+
             return winsAndLosses;
         }
         else {
