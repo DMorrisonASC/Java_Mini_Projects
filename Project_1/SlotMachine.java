@@ -26,24 +26,24 @@ public class SlotMachine {
         Random rand = new Random();
         Scanner scan = new Scanner(System.in); // Scan for user inputs
 //
-        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
-        String[][] slotsArray = new String[3][3];
+//        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
+//        String[][] slotsArray = new String[3][3];
         System.out.println("Welcome to the slot machine!\n -----------------------------");
-        
+
         while (continuePlaying) {
             System.out.println("You have $" + playerMoney + " on hand."); // Output money on hand
             System.out.println("Machine balance: $" + moneyInMachine);
             System.out.println("Bet amount: $" + betAmount);
             System.out.println("You can: \nA) Add money \nB) Change bet amount \nC) Play \nD) Cash-out");
             System.out.println("What do you want to do? Choices:");
-            
+
 //          Ask for inputs 'a', 'b', 'c' or 'd'. If it's not keep asking and looping
             choice = scan.next().toLowerCase().charAt(0);
             while ( choice != 'a' && choice != 'b' && choice != 'c' && choice != 'd') {
                 System.out.println("Invalid Choice. Pick 'A', 'B', 'C' or 'D': ");
                 choice = scan.next().toLowerCase().charAt(0);
             }
-            
+
             switch (choice) {
 
                 case 'a':
@@ -61,28 +61,30 @@ public class SlotMachine {
                     betAmount = changeBet(betAmount);
                     break;
                 case 'c':
-                    System.out.println("Nothing!3");
+                    double[] theWinsAndLosses = playGame(betAmount, moneyInMachine);
+                    moneyInMachine += theWinsAndLosses[0];
+                    totalLosses += theWinsAndLosses[1];
                     break;
                 case 'd':
                     continuePlaying = leaveGame(moneyInMachine, totalLosses, playerMoney);
             }
         }
 
-//        Randomly play symbols into each slot
-        for (int i = 0; i < slotsArray.length; i++) {
-            for (int j = 0; j < slotsArray[i].length; j++) {
-                int randIndex = rand.nextInt(7);
-                slotsArray[i][j] = symbols[randIndex];
-            }
-
-        }
-//        Print the spin result
-        for (int i = 0; i < slotsArray.length; i++) {
-            for (int j = 0; j < slotsArray[i].length; j++) {
-                System.out.printf("%10s |", slotsArray[i][j]);
-            }
-            System.out.println();
-        }
+////        Randomly play symbols into each slot
+//        for (int i = 0; i < slotsArray.length; i++) {
+//            for (int j = 0; j < slotsArray[i].length; j++) {
+//                int randIndex = rand.nextInt(7);
+//                slotsArray[i][j] = symbols[randIndex];
+//            }
+//
+//        }
+////        Print the spin result
+//        for (int i = 0; i < slotsArray.length; i++) {
+//            for (int j = 0; j < slotsArray[i].length; j++) {
+//                System.out.printf("%10s |", slotsArray[i][j]);
+//            }
+//            System.out.println();
+//        }
     }
 //  Adds money to `moneyInMachine` and subtracts from `playerMoney`
     public static double addMoney(double moneyOnHand) {
@@ -126,9 +128,40 @@ public class SlotMachine {
         }
     }
 
-    
+    public static double[] playGame(double theBetAmount, double theMoneyInMachine) {
+//        Init vars
+        double wins = 0;
+        double losses = 0;
+        double[] winsAndLosses = {wins, losses};
+        Random rand = new Random();
 
+        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
+        String[][] slotsArray = new String[3][3];
 
+        if (theMoneyInMachine >= theBetAmount) {
+            System.out.println("The game is about to start!");
+            //        Randomly play symbols into each slot
+            for (int i = 0; i < slotsArray.length; i++) {
+                for (int j = 0; j < slotsArray[i].length; j++) {
+                    int randIndex = rand.nextInt(7);
+                    slotsArray[i][j] = symbols[randIndex];
+                }
+
+            }
+//        Print the spin result
+            for (int i = 0; i < slotsArray.length; i++) {
+                for (int j = 0; j < slotsArray[i].length; j++) {
+                    System.out.printf("%10s |", slotsArray[i][j]);
+                }
+                System.out.println();
+            }
+            return winsAndLosses;
+        }
+        else {
+            System.out.println("You do not have enough money to cover current bet amount. Add more money to the machine.");
+            return winsAndLosses;
+        }
+    }
 
     public static boolean leaveGame(double newMoneyInMachine, double newTotalLosses, double newPlayerMoney) {
 //        If amount of money in machine is equal to or greater than all the money they put into the machine + bet amount lost,
