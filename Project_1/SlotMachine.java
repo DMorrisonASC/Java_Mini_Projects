@@ -147,7 +147,6 @@ public class SlotMachine {
                     int randIndex = rand.nextInt(7);
                     slotsArray[i][j] = symbols[randIndex];
                 }
-
             }
 //        Print the spin result
             for (int i = 0; i < slotsArray.length; i++) {
@@ -200,9 +199,16 @@ public class SlotMachine {
                 System.out.println("2x diagonal");
             }
 //                2nd diagonal
+            if (slotsArray[0][2].equals(slotsArray[1][1]) && slotsArray[0][2].equals(slotsArray[2][0])) {
+                System.out.println("3x diagonal");
+            }
+            else if (slotsArray[1][1].equals(slotsArray[0][2])) {
+                System.out.println("2x diagonal");
+            }
+            else if (slotsArray[1][1].equals(slotsArray[2][0])) {
+                System.out.println("2x diagonal");
+            }
 
-            
-            
             return winsAndLosses;
         }
         else {
