@@ -9,6 +9,9 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
+// To-do:
+//1) Print 2 digits
+
 public class SlotMachine {
     public static void main(String[] args) {
 //        Init all block variables
@@ -22,23 +25,25 @@ public class SlotMachine {
 //        Init objects
         Random rand = new Random();
         Scanner scan = new Scanner(System.in); // Scan for user inputs
-
+//
         String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
         String[][] slotsArray = new String[3][3];
         System.out.println("Welcome to the slot machine!\n -----------------------------");
+        
         while (continuePlaying) {
             System.out.println("You have $" + playerMoney + " on hand."); // Output money on hand
             System.out.println("Machine balance: $" + moneyInMachine);
             System.out.println("Bet amount: $" + betAmount);
             System.out.println("You can: \nA) Add money \nB) Change bet amount \nC) Play \nD) Cash-out");
             System.out.println("What do you want to do? Choices:");
+            
 //          Ask for inputs 'a', 'b', 'c' or 'd'. If it's not keep asking and looping
             choice = scan.next().toLowerCase().charAt(0);
             while ( choice != 'a' && choice != 'b' && choice != 'c' && choice != 'd') {
                 System.out.println("Invalid Choice. Pick 'A', 'B', 'C' or 'D': ");
                 choice = scan.next().toLowerCase().charAt(0);
             }
-
+            
             switch (choice) {
 
                 case 'a':
@@ -53,7 +58,7 @@ public class SlotMachine {
                     System.out.println(totalLosses);
                     break;
                 case 'b':
-                    System.out.println("Nothing!2");
+                    betAmount = changeBet(betAmount);
                     break;
                 case 'c':
                     System.out.println("Nothing!3");
@@ -82,7 +87,6 @@ public class SlotMachine {
 //  Adds money to `moneyInMachine` and subtracts from `playerMoney`
     public static double addMoney(double moneyOnHand) {
 //        Init objects
-        Random rand = new Random();
         Scanner scan = new Scanner(System.in); // Scan for user inputs
         double amountToAdd;
         double newMoneyInMachine = 0;
@@ -102,17 +106,41 @@ public class SlotMachine {
         return amountToAdd;
     }
 
-    public static boolean leaveGame(double moneyInMachine, double totalLosses, double playerMoney) {
+    public static double changeBet(double betAmount) {
+//        Init objects
+        Scanner scan = new Scanner(System.in); // Scan for user inputs
+//        Ask for new bet amount
+        System.out.println("How much would you like the future bet to be?: ");
+        double newBetAmount = scan.nextDouble();
+//        Set a new bet amount if it's greater than $0
+//        If not, inform them of the mistake and that the bet
+//        amount remains unchanged
+        if (newBetAmount >= 0.01) {
+            System.out.println("Your current bet amount is " + newBetAmount + ". This will be the future bet amount.");
+            return  newBetAmount;
+        }
+        else {
+            System.out.println("Your amount is too low. The bet amount of " + betAmount + " remains unchanged");
+            newBetAmount = betAmount;
+            return newBetAmount;
+        }
+    }
+
+    
+
+
+
+    public static boolean leaveGame(double newMoneyInMachine, double newTotalLosses, double newPlayerMoney) {
 //        If amount of money in machine is equal to or greater than all the money they put into the machine + bet amount lost,
 //        then they made money and won.
 //        If not, they lost money.
-        if (moneyInMachine >= totalLosses) {
-            System.out.println("Your winnings: $" + (moneyInMachine - totalLosses));
+        if (newMoneyInMachine >= newTotalLosses) {
+            System.out.println("Your winnings: $" + (newMoneyInMachine - newTotalLosses));
         }
         else {
-            System.out.println("You lost: $" + (moneyInMachine - totalLosses));
+            System.out.println("You lost: $" + (newMoneyInMachine - newTotalLosses));
         }
-        System.out.println("Current balance: $" + (playerMoney + moneyInMachine));
+        System.out.println("Current balance: $" + (newPlayerMoney + newMoneyInMachine));
         System.out.println("Bye, please come again!");
         return false;
     }
