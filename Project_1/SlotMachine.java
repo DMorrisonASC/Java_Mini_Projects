@@ -176,7 +176,21 @@ public class SlotMachine {
                     System.out.println("2x");
                 }
             }
-
+//            Next, check columns
+//            for (int i = 0; i < slotsArray[i].length; i++) {
+//                System.out.println(i);
+//            }
+            for (int i = 0; i < slotsArray.length; i++) {
+                if (slotsArray[0][i].equals(slotsArray[1][i]) && slotsArray[0][i].equals(slotsArray[2][i])) {
+                    System.out.println("3x");
+                }
+                else if (slotsArray[1][i].equals(slotsArray[0][i])) {
+                    System.out.println("2x");
+                }
+                else if (slotsArray[1][i].equals(slotsArray[2][i])) {
+                    System.out.println("2x");
+                }
+            }
 
 
             return winsAndLosses;
