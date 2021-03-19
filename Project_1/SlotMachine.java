@@ -27,9 +27,6 @@ public class SlotMachine {
 //        Init objects
         Random rand = new Random();
         Scanner scan = new Scanner(System.in); // Scan for user inputs
-//
-//        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
-//        String[][] slotsArray = new String[3][3];
         System.out.println("Welcome to the slot machine!\n -----------------------------");
 
         while (continuePlaying) {
@@ -42,7 +39,7 @@ public class SlotMachine {
 //          Ask for inputs 'a', 'b', 'c' or 'd'. If it's not keep asking and looping
             choice = scan.next().toLowerCase().charAt(0);
             while ( choice != 'a' && choice != 'b' && choice != 'c' && choice != 'd') {
-                System.out.println("Invalid Choice. Pick 'A', 'B', 'C' or 'D': ");
+                System.out.println("Invalid Choice. Pick A) Add money B) Change bet amount C) Play D) Cash-out: ");
                 choice = scan.next().toLowerCase().charAt(0);
             }
 
@@ -65,10 +62,12 @@ public class SlotMachine {
                 case 'c':
                     double theWinsAndLosses = playGame(betAmount, moneyInMachine);
                     moneyInMachine += theWinsAndLosses;
-//                    totalLosses += theWinsAndLosses;
                     break;
                 case 'd':
-                    continuePlaying = leaveGame(moneyInMachine, totalLosses, playerMoney);
+                    moneyTransferred = leaveGame(moneyInMachine, totalLosses, playerMoney);
+                    moneyInMachine -= moneyTransferred;
+                    playerMoney += moneyTransferred;
+                    continuePlaying = false;
             }
         }
     }
@@ -114,115 +113,6 @@ public class SlotMachine {
         }
     }
 
-//    public static double[] playGame(double theBetAmount, double theMoneyInMachine) {
-////        Init vars
-//        double wins = 0;
-//        double losses = 0;
-//        double multiplier = 0;
-//        double[] winsAndLosses = new double[2];
-//        Random rand = new Random();
-//
-//        String[] symbols = {"Heart", "Spade", "Diamond", "Club", "Bell", "Cherry", "Horseshoe"};
-//        String[][] slotsArray = new String[3][3];
-//
-//        if (theMoneyInMachine >= theBetAmount) {
-////            Tell user the game is about to start
-//            System.out.println("The game is about to start!");
-////            Deduct bet amount & temporary make `losses` = `theBetAmount`.
-////            If user wins any
-//            wins -= theBetAmount;
-//            losses = theBetAmount;
-//            //        Randomly play symbols into each slot
-//            for (int i = 0; i < slotsArray.length; i++) {
-//                for (int j = 0; j < slotsArray[i].length; j++) {
-//                    int randIndex = rand.nextInt(7);
-//                    slotsArray[i][j] = symbols[randIndex];
-//                }
-//            }
-////        Print the spin result
-//            for (int i = 0; i < slotsArray.length; i++) {
-//                for (int j = 0; j < slotsArray[i].length; j++) {
-//                    System.out.printf("%10s |", slotsArray[i][j]);
-//                }
-//                System.out.println();
-//            }
-//            /* Check for any winning combinations:
-//                o Three of a kind on any single row, column, or diagonal (Payout is 3X the bet amount)
-//                o Two of a kind adjacent to each other on any single row, column, or diagonal (Payout is 2X the
-//                        bet amount)
-//                  ▪ i.e. If the row/column/diagonal had A-A-A, it must be counted as a three of a kind and
-//                not two, two of a kinds
-//                o If multiple instances of three of a kind or two of a kind exist, the payouts should be summed
-//             */
-////            First, check rows
-//            for (int i = 0; i < slotsArray.length; i++) {
-//                if (slotsArray[i][0].equals(slotsArray[i][1]) && slotsArray[i][0].equals(slotsArray[i][2])) {
-//                    System.out.println("3x row");
-//                    multiplier += 3;
-//                }
-//                else if (slotsArray[i][1].equals(slotsArray[i][0])) {
-//                    System.out.println("2x row");
-//                    multiplier += 2;
-//                }
-//                else if (slotsArray[i][1].equals(slotsArray[i][2])) {
-//                    System.out.println("2x row");
-//                    multiplier += 2;
-//                }
-//            }
-////            Next, check columns
-//            for (int i = 0; i < slotsArray.length; i++) {
-//                if (slotsArray[0][i].equals(slotsArray[1][i]) && slotsArray[0][i].equals(slotsArray[2][i])) {
-//                    System.out.println("3x column");
-//                    multiplier += 3;
-//                }
-//                else if (slotsArray[1][i].equals(slotsArray[0][i])) {
-//                    System.out.println("2x column");
-//                    multiplier += 2;
-//                }
-//                else if (slotsArray[1][i].equals(slotsArray[2][i])) {
-//                    System.out.println("2x column");
-//                    multiplier += 2;
-//                }
-//            }
-////            Check  both diagonals
-////                1st diagonal
-//            if (slotsArray[0][0].equals(slotsArray[1][1]) && slotsArray[0][0].equals(slotsArray[2][2])) {
-//                System.out.println("3x diagonal");
-//                multiplier += 3;
-//            }
-//            else if (slotsArray[1][1].equals(slotsArray[0][0])) {
-//                System.out.println("2x diagonal");
-//                multiplier += 2;
-//            }
-//            else if (slotsArray[1][1].equals(slotsArray[2][2])) {
-//                System.out.println("2x diagonal");
-//                multiplier += 2;
-//            }
-////                2nd diagonal
-//            if (slotsArray[0][2].equals(slotsArray[1][1]) && slotsArray[0][2].equals(slotsArray[2][0])) {
-//                System.out.println("3x diagonal");
-//                multiplier += 3;
-//            }
-//            else if (slotsArray[1][1].equals(slotsArray[0][2])) {
-//                System.out.println("2x diagonal");
-//                multiplier += 2;
-//            }
-//            else if (slotsArray[1][1].equals(slotsArray[2][0])) {
-//                System.out.println("2x diagonal");
-//                multiplier += 2;
-//            }
-//            wins = (theBetAmount * multiplier) - theBetAmount;
-//            System.out.println(multiplier);
-//            winsAndLosses = new double[]{wins, losses};
-//
-//            return winsAndLosses;
-//        }
-//        else {
-//            System.out.println("You do not have enough money to cover current bet amount. Add more money to the machine.");
-//            System.out.println(winsAndLosses[0] + " " + winsAndLosses[1]);
-//            return winsAndLosses;
-//        }
-//    }
 public static double playGame(double theBetAmount, double theMoneyInMachine) {
 //        Init vars
     double wins = 0;
@@ -316,6 +206,12 @@ public static double playGame(double theBetAmount, double theMoneyInMachine) {
             multiplier += 2;
         }
         wins = (theBetAmount * multiplier) - theBetAmount;
+        if (wins > 0) {
+            System.out.println("You won $" + wins);
+        }
+        else {
+            System.out.println("You lost $" + wins + ". Try again next round!");
+        }
         return wins;
     }
     else {
@@ -323,7 +219,7 @@ public static double playGame(double theBetAmount, double theMoneyInMachine) {
         return wins;
     }
 }
-    public static boolean leaveGame(double newMoneyInMachine, double newTotalLosses, double newPlayerMoney) {
+    public static double leaveGame(double newMoneyInMachine, double newTotalLosses, double newPlayerMoney) {
 //        If amount of money in machine is equal to or greater than all the money they put into the machine + bet amount lost,
 //        then they made money and won.
 //        If not, they lost money.
@@ -335,6 +231,6 @@ public static double playGame(double theBetAmount, double theMoneyInMachine) {
         }
         System.out.println("Current balance: $" + (newPlayerMoney + newMoneyInMachine));
         System.out.println("Bye, please come again!");
-        return false;
+        return newMoneyInMachine;
     }
 }
