@@ -24,16 +24,16 @@ public class OrderSystem {
 
         calcTotal(product);
 
-        System.out.println("Product name: " + product.getName());
-        System.out.println("Ordered " + product.getName() + "(s) " + product.getunitsOrdered());
+        System.out.println("Name: " + product.getName());
+        System.out.println("Units " + product.getunitsOrdered());
         System.out.println("Each cost $" + df2.format(product.getPrice()));
-        System.out.println("Total cost of order is $" + df2.format(product.getTotalPrice()));
+        System.out.println("Total cost: $" + df2.format(product.getTotalPrice()));
 
     }
     /* A private method named calcTotal that returns nothing and take a Product object as a
         parameter. The method calculates the total cost of the order using the information from
         the Product object and then store the total cost in variable in the Product object.
-*/
+    */
     private static void calcTotal(Product aProduct){
 //        Get price of each product and number of products ordered
         double pricePerProduct = aProduct.getPrice();
