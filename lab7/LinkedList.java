@@ -7,6 +7,8 @@ class to store the first and last node in the chain and functions associated wit
 `Library` class that will be using a `LinkedList` to keep track of the titles of books in the library. The user
 should be able to insert new titles, search for titles, remove titles, and output all of the titles in the library.
 */
+// A class named LinkedList to store multiple book titles. This
+//class should contain
 public class LinkedList {
     private Node head;
     private Node tail;
@@ -14,7 +16,8 @@ public class LinkedList {
     public LinkedList() {
         head = null;
     }
-
+//A method that takes in a String representing a book title as a parameter and inserts the title
+//into the Linked List at the end
     public void insert(String title) {
         Node current;
 
@@ -40,7 +43,9 @@ public class LinkedList {
         }
 
     }
-
+//    A method that takes in a String representing a book title as a parameter and searches for the
+//    title is in the LinkedList. The method should return true if the title was in the Linked List
+//    and false if not
     public boolean search(String title) {
         Node current = head;
 
@@ -52,7 +57,9 @@ public class LinkedList {
         }
         return false;
     }
-
+//    A method that takes in a String representing a book title as a parameter and deletes the title
+//in the LinkedList. The method should return true if the title was successfully deleted from
+//the LinkedList and false if not
     public boolean remove(String title)
     {
         if(head == null)
