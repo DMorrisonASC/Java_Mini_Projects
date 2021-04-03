@@ -9,13 +9,18 @@ class to store the first and last node in the chain and functions associated wit
 `Library` class that will be using a `LinkedList` to keep track of the titles of books in the library. The user
 should be able to insert new titles, search for titles, remove titles, and output all of the titles in the library.
 */
+//a class named Library to keep track of the book titles in a
+//        library.
 public class Library {
     public static void main(String[] args) {
+//        A single instance of a LinkedList object to store the book titles
         LinkedList booksInStock =  new LinkedList();
         Scanner scan = new Scanner(System.in);
         String bookTitle = new String();
         boolean keepGoing = true;
-
+//      A loop that outputs a menu of options regarding the library (add titles, search for titles,
+//remove titles, output all titles, quit), prompts the user for which option they would like,
+//and uses a switch to take the appropriate actions OR quits the loop if they select quit.
         while (keepGoing) {
             System.out.println("Menu:");
             System.out.println("1) Add titles");
@@ -37,7 +42,8 @@ public class Library {
                     System.out.println("What's the title to search?: ");
                     scan = new Scanner(System.in);
                     bookTitle = scan.nextLine();
-
+//                    If the book title is searched for and found/not found, the user should be informed that
+//                  the book exists/does not exist
                     if (booksInStock.search(bookTitle)) {
                         System.out.println( "\"" + bookTitle +"\"" + " was found");
                     }
@@ -49,7 +55,8 @@ public class Library {
                     System.out.println("What title to remove?: ");
                     scan = new Scanner(System.in);
                     bookTitle = scan.nextLine();
-
+//                  If the book title is attempted to be deleted and is/is not deleted, the user should be
+//                      informed that the book title was delete/not deleted
                     if (booksInStock.remove(bookTitle)) {
                         System.out.println("\"" + bookTitle +"\"" + " was deleted");
                     }
