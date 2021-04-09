@@ -38,23 +38,25 @@ public class Poem {
 //            Read the first line of the file and store it in the appropriate variable
             if (lineNumber == 1) {
                 title = fileInput.nextLine();
-//                System.out.println(title);
             }
 //            Read the second line of the file and store it in the appropriate variable
             else if(lineNumber == 2) {
                 author = fileInput.nextLine();
-//                System.out.println(author);
             }
 //            Read in all other lines of the file and add each one to the ArrayList
             else {
                 poemLines.add(fileInput.nextLine());
-//                System.out.println(poemLines);
             }
         }
+
         fileInput.close();
 
         FileWriter myWriter = new FileWriter("Output.txt", false);
-
+//        Output the following information to Output.txt
+//        - The name of the poem
+//        - The author of the poem
+//        - The number of lines in the poem
+//        - The first three lines of the poem to provide a preview of the poem
         myWriter.write("The title of the poem is " + title + System.lineSeparator());
         myWriter.write("The Author of the poem is " + author + System.lineSeparator());
         myWriter.write("The number of lines in the poem is " + poemLines.size() + System.lineSeparator());
