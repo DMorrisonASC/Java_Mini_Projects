@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,18 +48,25 @@ public class Poem {
 
         fileInput.close();
 
-        FileWriter myWriter = new FileWriter("Output.txt", false);
+        PrintWriter myWriter = new PrintWriter("Output.txt");
 //        Output the following information to Output.txt
 //        - The name of the poem
 //        - The author of the poem
 //        - The number of lines in the poem
 //        - The first three lines of the poem to provide a preview of the poem
-        myWriter.write("The title of the poem is " + title + System.lineSeparator());
-        myWriter.write("The Author of the poem is " + author + System.lineSeparator());
-        myWriter.write("The number of lines in the poem is " + poemLines.size() + System.lineSeparator());
-        myWriter.write("A preview of the poem is :" + System.lineSeparator());
+//        myWriter.write("The title of the poem is " + title + System.lineSeparator());
+//        myWriter.write("The Author of the poem is " + author + System.lineSeparator());
+//        myWriter.write("The number of lines in the poem is " + poemLines.size() + System.lineSeparator());
+//        myWriter.write("A preview of the poem is :" + System.lineSeparator());
+//        for (int i = 0; i < poemLines.size() - 4; i++) {
+//            myWriter.write(poemLines.get(i) + System.lineSeparator());
+//        }
+        myWriter.println("The title of the poem is " + title);
+        myWriter.println("The Author of the poem is " + author);
+        myWriter.println("The number of lines in the poem is " + poemLines.size());
+        myWriter.println("A preview of the poem is :");
         for (int i = 0; i < poemLines.size() - 4; i++) {
-            myWriter.write(poemLines.get(i) + System.lineSeparator());
+            myWriter.println(poemLines.get(i));
         }
         myWriter.close();
     }
