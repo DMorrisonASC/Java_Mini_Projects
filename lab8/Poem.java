@@ -54,13 +54,6 @@ public class Poem {
 //        - The author of the poem
 //        - The number of lines in the poem
 //        - The first three lines of the poem to provide a preview of the poem
-//        myWriter.write("The title of the poem is " + title + System.lineSeparator());
-//        myWriter.write("The Author of the poem is " + author + System.lineSeparator());
-//        myWriter.write("The number of lines in the poem is " + poemLines.size() + System.lineSeparator());
-//        myWriter.write("A preview of the poem is :" + System.lineSeparator());
-//        for (int i = 0; i < poemLines.size() - 4; i++) {
-//            myWriter.write(poemLines.get(i) + System.lineSeparator());
-//        }
         myWriter.println("The title of the poem is " + title);
         myWriter.println("The Author of the poem is " + author);
         myWriter.println("The number of lines in the poem is " + poemLines.size());
