@@ -6,7 +6,7 @@ import java.util.Scanner;
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date: 4/2/2021
     Instructor: Professor Hellsing
-    Description:
+    Description: Read from a file and output it into `Output.txt`.
 */
 public class Poem {
     public static void main(String[] args) throws IOException {
