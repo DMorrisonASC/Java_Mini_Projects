@@ -95,19 +95,15 @@ public class LLibrary {
                     String bookTitle2 = scan.nextLine();
 //                  If the book title is attempted to be deleted and is/is not deleted, the user should be
 //                      informed that the book title was delete/not deleted
-                    boolean isBookThere2 = false;
                     for (int i = 0; i < booksInStock.size(); i++) {
                         if (bookTitle2.equals(booksInStock.get(i).getTitle())) {
-                            booksInStock.remove(i);
-                            isBookThere2 = true;
+                            if (booksInStock.get(i).getStock() > 1) {
+                                booksInStock.get(i).setStock(booksInStock.get(i).getStock() - 1);
+                            }
+                            else {
+                                booksInStock.remove(i);
+                            }
                         }
-                    }
-
-                    if (isBookThere2 == true) {
-                        System.out.println( "\"" + bookTitle2 + "\"" + " was deleted");
-                    }
-                    else {
-                        System.out.println("\"" + bookTitle2 + "\"" + " does not exist");
                     }
 
                     break;
