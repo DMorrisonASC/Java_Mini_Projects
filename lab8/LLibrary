@@ -54,16 +54,9 @@ public class LLibrary {
                                 edit.setStock(booksInStock.get(i).getStock() + 1);
                                 bookAdded = true;
                             }
-//                            else {
-//                                if (bookAdded == false) {
-//                                    Book addBook = new Book(titleToAdd);
-//                                    booksInStock.add(addBook);
-//                                    bookAdded = true;
-//                                }
-//                            }
                         }
                         if (bookAdded == false) {
-                            Book addBook = new Book(titleToAdd);
+                            Book addBook = new Book(titleToAdd, 1);
                             booksInStock.add(addBook);
                         }
                     }
@@ -150,7 +143,7 @@ public class LLibrary {
     }
 
     public static void save(LinkedList<Book> newBookInStock) throws IOException{
-        PrintWriter myWriter = new PrintWriter("Output.txt");
+        PrintWriter myWriter = new PrintWriter("Inventory.txt");
 //        Output the following information to Inventory.txt
         for (int i = 0; i < newBookInStock.size(); i++) {
             myWriter.println(newBookInStock.get(i).getTitle() + ":" + newBookInStock.get(i).getStock());
