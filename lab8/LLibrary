@@ -81,26 +81,27 @@ public class LLibrary {
                     else {
                         System.out.println("\"" + bookTitle + "\"" + " does not exist");
                     }
-                    break;
 
+                    break;
                 case 3:
                     System.out.println("What title to delete?: ");
                     scan = new Scanner(System.in);
                     String bookTitle2 = scan.nextLine();
 //                  If the book title is attempted to be deleted and is/is not deleted, the user should be
 //                      informed that the book title was delete/not deleted
-//                    boolean isBookThere;
-//                    for (int i = 0; i < booksInStock.size(); i++) {
-//                        if (bookTitle.equals(booksInStock.get(i).getTitle())) {
-//
-//                        }
-//                    }
+                    boolean isBookThere2 = false;
+                    for (int i = 0; i < booksInStock.size(); i++) {
+                        if (bookTitle2.equals(booksInStock.get(i).getTitle())) {
+                            booksInStock.remove(i);
+                            isBookThere2 = true;
+                        }
+                    }
 
-                    if (booksInStock.remove(bookTitle2)) {
-                        System.out.println("\"" + bookTitle2 +"\"" + " was deleted");
+                    if (isBookThere2 == true) {
+                        System.out.println( "\"" + bookTitle2 + "\"" + " was deleted");
                     }
                     else {
-                        System.out.println( "\"" + bookTitle2 +"\"" + " does not exist");
+                        System.out.println("\"" + bookTitle2 + "\"" + " does not exist");
                     }
 
                     break;
