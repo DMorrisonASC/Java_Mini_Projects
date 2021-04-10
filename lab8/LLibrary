@@ -31,9 +31,10 @@ public class LLibrary {
             System.out.println("Menu:");
             System.out.println("1) Add titles");
             System.out.println("2) Search titles");
-            System.out.println("3) Remove titles");
-            System.out.println("4) Load files");
-            System.out.println("5) Save files");
+            System.out.println("3) Delete titles");
+            System.out.println("4) Output files");
+            System.out.println("5) Load files");
+            System.out.println("6) Save files");
 
             int choice = scan.nextInt();
 
@@ -43,7 +44,28 @@ public class LLibrary {
                     scan = new Scanner(System.in);
                     title = scan.nextLine();
 
-//                    booksInStock.add(addBook);
+
+                    if (booksInStock.size() == 0) {
+                        Book addBook = new Book(title, 1);
+                        booksInStock.add(addBook);
+                        System.out.println(booksInStock.size());
+                    }
+                    else{
+                        for (int i = 0; i < booksInStock.size(); i++) {
+                            if (title.equals(booksInStock.get(i).getTitle())) {
+                                booksInStock.get(i).setStock(booksInStock.get(i).getStock() + 1);
+                            } else {
+                                boolean bookAdded = false;
+                                if (bookAdded = false) {
+                                    Book addBook = new Book(title, 1);
+                                    booksInStock.add(addBook);
+                                }
+                                else {
+                                    bookAdded = true;
+                                }
+                            }
+                        }
+                    }
 
                     break;
                 case 2:
@@ -73,14 +95,14 @@ public class LLibrary {
 //                    }
                     break;
                 case 4:
-                    load(booksInStock);
                     for (int i = 0; i < booksInStock.size(); i++) {
-
-                        System.out.println(booksInStock.get(i));
+                        System.out.println(booksInStock.get(i).getTitle() + ":" + booksInStock.get(i).getStock());
                     }
-
                     break;
                 case 5:
+                    load(booksInStock);
+                    break;
+                case 6:
                     save(booksInStock);
                     keepGoing = false;
                     break;
@@ -108,11 +130,10 @@ public class LLibrary {
             String bookTitle = stringReader.next();
             int bookStock = stringReader.nextInt();
 
-            Book addBook = new Book(bookTitle, bookStock);
-            newBooksInStock.add(addBook);
+            Book loadBook = new Book(bookTitle, bookStock);
+            newBooksInStock.add(loadBook);
 
         }
-
         myFile.close();
     }
 
@@ -120,7 +141,6 @@ public class LLibrary {
         PrintWriter myWriter = new PrintWriter("Output.txt");
 //        Output the following information to Inventory.txt
         for (int i = 0; i < newBookInStock.size(); i++) {
-            System.out.println(newBookInStock.get(i).getTitle());
             myWriter.println(newBookInStock.get(i).getTitle() + ":" + newBookInStock.get(i).getStock());
         }
         myWriter.close();
