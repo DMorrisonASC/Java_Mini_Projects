@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,7 +42,6 @@ public class LLibrary {
                     scan = new Scanner(System.in);
                     title = scan.nextLine();
 
-
                     if (booksInStock.size() == 0) {
                         Book addBook = new Book(title, 1);
                         booksInStock.add(addBook);
@@ -62,37 +59,50 @@ public class LLibrary {
                                     bookAdded = true;
                                 }
                             }
-                            System.out.println(bookAdded);
                         }
-                        System.out.println(bookAdded);
                     }
-
                     break;
                 case 2:
                     System.out.println("What's the title to search?: ");
                     scan = new Scanner(System.in);
-                    title = scan.nextLine();
+                    String bookTitle = scan.nextLine();
 //                    If the book title is searched for and found/not found, the user should be informed that
 //                  the book exists/does not exist
-                    if (booksInStock.contains(title)) {
-                        System.out.println( "\"" + title + "\"" + " was found");
+                    boolean isBookThere = false;
+                    for (int i = 0; i < booksInStock.size(); i++) {
+                        if (bookTitle.equals(booksInStock.get(i).getTitle())) {
+                            isBookThere = true;
+                        }
+                    }
+
+                    if (isBookThere == true) {
+                        System.out.println( "\"" + bookTitle + "\"" + " was found");
                     }
                     else {
-                        System.out.println("\"" + title + "\"" + " does not exist");
+                        System.out.println("\"" + bookTitle + "\"" + " does not exist");
                     }
                     break;
+
                 case 3:
-                    System.out.println("What title to remove?: ");
+                    System.out.println("What title to delete?: ");
                     scan = new Scanner(System.in);
-//                    bookTitle = scan.nextLine();
-////                  If the book title is attempted to be deleted and is/is not deleted, the user should be
-////                      informed that the book title was delete/not deleted
-//                    if (booksInStock.remove(bookTitle)) {
-//                        System.out.println("\"" + bookTitle +"\"" + " was deleted");
+                    String bookTitle2 = scan.nextLine();
+//                  If the book title is attempted to be deleted and is/is not deleted, the user should be
+//                      informed that the book title was delete/not deleted
+//                    boolean isBookThere;
+//                    for (int i = 0; i < booksInStock.size(); i++) {
+//                        if (bookTitle.equals(booksInStock.get(i).getTitle())) {
+//
+//                        }
 //                    }
-//                    else {
-//                        System.out.println( "\"" + bookTitle +"\"" + " does not exist");
-//                    }
+
+                    if (booksInStock.remove(bookTitle2)) {
+                        System.out.println("\"" + bookTitle2 +"\"" + " was deleted");
+                    }
+                    else {
+                        System.out.println( "\"" + bookTitle2 +"\"" + " does not exist");
+                    }
+
                     break;
                 case 4:
                     for (int i = 0; i < booksInStock.size(); i++) {
