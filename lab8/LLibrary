@@ -48,23 +48,23 @@ public class LLibrary {
                     if (booksInStock.size() == 0) {
                         Book addBook = new Book(title, 1);
                         booksInStock.add(addBook);
-                        System.out.println(booksInStock.size());
                     }
-                    else{
+                    else {
+                        boolean bookAdded = false;
                         for (int i = 0; i < booksInStock.size(); i++) {
                             if (title.equals(booksInStock.get(i).getTitle())) {
                                 booksInStock.get(i).setStock(booksInStock.get(i).getStock() + 1);
-                            } else {
-                                boolean bookAdded = false;
-                                if (bookAdded = false) {
-                                    Book addBook = new Book(title, 1);
+                            }
+                            else if (!title.equals(booksInStock.get(i).getTitle())) {
+                                if (bookAdded == false) {
+                                    Book addBook = new Book(title);
                                     booksInStock.add(addBook);
-                                }
-                                else {
                                     bookAdded = true;
                                 }
                             }
+                            System.out.println(bookAdded);
                         }
+                        System.out.println(bookAdded);
                     }
 
                     break;
