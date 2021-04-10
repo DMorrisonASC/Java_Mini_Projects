@@ -1,5 +1,8 @@
+import org.w3c.dom.Node;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 /*
@@ -16,7 +19,7 @@ should be able to insert new titles, search for titles, remove titles, and outpu
 public class LLibrary {
     public static void main(String[] args) throws IOException{
 //        A single instance of a LinkedList object to store the book titles
-        LinkedList booksInStock =  new LinkedList();
+        LinkedList<Book> booksInStock = new LinkedList<>();
         Scanner scan = new Scanner(System.in);
         String title = new String();
         boolean keepGoing = true;
@@ -29,8 +32,8 @@ public class LLibrary {
             System.out.println("1) Add titles");
             System.out.println("2) Search titles");
             System.out.println("3) Remove titles");
-            System.out.println("4) Load Files");
-            System.out.println("5) Quit/End the program");
+            System.out.println("4) Load files");
+            System.out.println("5) Save files");
 
             int choice = scan.nextInt();
 
@@ -40,8 +43,7 @@ public class LLibrary {
                     scan = new Scanner(System.in);
                     title = scan.nextLine();
 
-                    Object addBook = new Book(title);
-                    booksInStock.add(addBook);
+//                    booksInStock.add(addBook);
 
                     break;
                 case 2:
@@ -86,7 +88,7 @@ public class LLibrary {
         }
     }
 
-    public  static void load(LinkedList newBooksInStock) throws IOException {
+    public  static void load(LinkedList<Book> newBooksInStock) throws IOException {
         System.out.println("What's the name of the file?: ");
         Scanner scan = new Scanner(System.in);
         File fileName = new File(scan.nextLine());
@@ -103,22 +105,24 @@ public class LLibrary {
             Scanner stringReader = new Scanner(line);
             stringReader.useDelimiter(":");
 
-            String objectTitle = stringReader.next();
-            int objectStock = stringReader.nextInt();
+            String bookTitle = stringReader.next();
+            int bookStock = stringReader.nextInt();
 
-            Object addBook = new Book(objectTitle, objectStock);
+            Book addBook = new Book(bookTitle, bookStock);
             newBooksInStock.add(addBook);
-//            System.out.println("\"" + stringReader.next() + "\"");
-//            System.out.println("\"" + stringReader.next() + "\"");
 
         }
-//        return newBooksInStock;
+
         myFile.close();
     }
 
-    public static void save(LinkedList newBookInStock) {
+    public static void save(LinkedList<Book> newBookInStock) throws IOException{
+        PrintWriter myWriter = new PrintWriter("Output.txt");
+//        Output the following information to Inventory.txt
         for (int i = 0; i < newBookInStock.size(); i++) {
-            System.out.println(i);
+            System.out.println(newBookInStock.get(i).getTitle());
+            myWriter.println(newBookInStock.get(i).getTitle() + ":" + newBookInStock.get(i).getStock());
         }
+        myWriter.close();
     }
 }
