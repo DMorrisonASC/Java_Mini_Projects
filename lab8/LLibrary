@@ -19,7 +19,6 @@ public class LLibrary {
 //        A single instance of a LinkedList object to store the book titles
         LinkedList<Book> booksInStock = new LinkedList<>();
         Scanner scan = new Scanner(System.in);
-        String title = new String();
         boolean keepGoing = true;
 
 //      A loop that outputs a menu of options regarding the library (add titles, search for titles,
@@ -40,25 +39,32 @@ public class LLibrary {
                 case 1:
                     System.out.println("Please insert a book by title: ");
                     scan = new Scanner(System.in);
-                    title = scan.nextLine();
+                    String titleToAdd = scan.nextLine();
 
                     if (booksInStock.size() == 0) {
-                        Book addBook = new Book(title, 1);
+                        Book addBook = new Book(titleToAdd, 1);
                         booksInStock.add(addBook);
                     }
                     else {
                         boolean bookAdded = false;
                         for (int i = 0; i < booksInStock.size(); i++) {
-                            if (title.equals(booksInStock.get(i).getTitle())) {
-                                booksInStock.get(i).setStock(booksInStock.get(i).getStock() + 1);
+
+                            if (titleToAdd.equals(booksInStock.get(i).getTitle())) {
+                                Book edit = booksInStock.get(i);
+                                edit.setStock(booksInStock.get(i).getStock() + 1);
+                                bookAdded = true;
                             }
-                            else if (!title.equals(booksInStock.get(i).getTitle())) {
-                                if (bookAdded == false) {
-                                    Book addBook = new Book(title);
-                                    booksInStock.add(addBook);
-                                    bookAdded = true;
-                                }
-                            }
+//                            else {
+//                                if (bookAdded == false) {
+//                                    Book addBook = new Book(titleToAdd);
+//                                    booksInStock.add(addBook);
+//                                    bookAdded = true;
+//                                }
+//                            }
+                        }
+                        if (bookAdded == false) {
+                            Book addBook = new Book(titleToAdd);
+                            booksInStock.add(addBook);
                         }
                     }
                     break;
@@ -115,7 +121,6 @@ public class LLibrary {
                     break;
                 case 6:
                     save(booksInStock);
-                    keepGoing = false;
                     break;
             }
         }
