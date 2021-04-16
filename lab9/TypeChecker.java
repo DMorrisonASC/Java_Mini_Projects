@@ -32,11 +32,11 @@ user’s data and tell them it was interpreted as text data
         else if (tryDouble(userInput)) {
             System.out.println(Double.parseDouble(userInput) + " was interpreted a double.");
         }
-        else if (userInput.isEmpty()){
-            System.out.println(userInput + " it was interpreted as a string");
+        else if (userInput.isEmpty()) {
+            System.out.println("Your input was only whitespace");
         }
         else {
-            System.out.println("Your input was only whitespace");
+            System.out.println(userInput + " was interpreted as a string");
         }
     }
     /* Using a try/catch statement, the method should attempt to parse the String as
