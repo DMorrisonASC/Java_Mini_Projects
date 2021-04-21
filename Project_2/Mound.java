@@ -15,23 +15,77 @@ what the nutrient levels in the field are now.
 import java.util.LinkedList;
 
 public class Mound {
-    private int numOfNutrient;
-    private int numOfSpores;
-    LinkedList<Mushroom> mushroomsInMound = new LinkedList<Mushroom>();
+    private int numOfNutrient = 0;
+    private int numOfSpores = 0;
+    private int daysToLive = 0;
+    private LinkedList<Mushroom> mushroomsInMound = new LinkedList<Mushroom>();
 
     public Mound(int nutrients) {
         this.numOfNutrient = nutrients;
     }
-
-    public Mound(Mushroom mushroom){
-        LinkedList<Mushroom> mushroomsInMound = new LinkedList<Mushroom>();
-        mushroomsInMound.add(mushroom);
+    public Mound(int nutrients, int spores) {
+        this.numOfNutrient = nutrients;
+        this.numOfSpores = spores;
+    }
+    public Mound(int nutrients, int spores, int daysToLive) {
+        this.numOfNutrient = nutrients;
+        this.numOfSpores = spores;
+        this.daysToLive = daysToLive;
     }
 
-    public static void addSpores(int amountOfNutrients) {
-        if (amountOfNutrients > 0) {
+    public int getNumOfNutrient() {
+        return numOfNutrient;
+    }
 
+    public void setNumOfNutrient(int numOfNutrient) {
+        this.numOfNutrient = numOfNutrient;
+    }
+
+    public int getNumOfSpores() {
+        return numOfSpores;
+    }
+
+    public void setNumOfSpores(int numOfSpores) {
+        this.numOfSpores = numOfSpores;
+    }
+
+    public int getDaysToLive() {
+        return daysToLive;
+    }
+
+    public void setDaysToLive(int daysToLive) {
+        this.daysToLive = daysToLive;
+    }
+
+    public LinkedList<Mushroom> getMushroomsInMound() {
+        return mushroomsInMound;
+    }
+
+    public void setMushroomsInMound(LinkedList<Mushroom> mushroomsInMound) {
+        this.mushroomsInMound = mushroomsInMound;
+    }
+
+    public void addSpores(int sporesAdded) {
+        this.numOfSpores += sporesAdded;
+    }
+    public void expendLife() {
+        for (int i = 0; i < mushroomsInMound.size(); i++) {
+            Mushroom expendMushroom = mushroomsInMound.get(i);
+            if (expendMushroom.getDaysToLive() > 0) {
+                expendMushroom.setDaysToLive(expendMushroom.getDaysToLive() - 1);
+            }
+            else {
+                mushroomsInMound.remove(mushroomsInMound.get(i));
+            }
         }
     }
 
+    public void growSpores() {
+        for (int i = 0; i < numOfSpores; i++) {
+            setNumOfSpores(getNumOfSpores() - 1);
+
+            Mushroom growMushroom = new Mushroom(getDaysToLive());
+            mushroomsInMound.add(growMushroom);
+        }
+    }
 }
