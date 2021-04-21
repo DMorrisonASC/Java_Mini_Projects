@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -37,6 +38,7 @@ public class Field {
         int lifeSpanNum = 0;
         int x_cord = 0;
         int y_cord = 0;
+        ArrayList<Integer> nutrients = new ArrayList<Integer>();
 
 //
         String line = myFile.nextLine();
@@ -46,8 +48,6 @@ public class Field {
         stringReader.next();
         lifeSpanNum = stringReader.nextInt();
 
-        System.out.println(lifeSpanNum);
-
         line = myFile.nextLine();
         stringReader = new Scanner(line);
         stringReader.useDelimiter("=|,");
@@ -55,9 +55,6 @@ public class Field {
         stringReader.next();
         x_cord = stringReader.nextInt();
         y_cord = stringReader.nextInt();
-
-        System.out.println(x_cord);
-        System.out.println(y_cord);
 
         while (myFile.hasNextLine()) {
             line = myFile.nextLine();
@@ -69,7 +66,8 @@ public class Field {
 
             while (stringReader.hasNext()) {
 //                stringReader.next();
-                System.out.println(stringReader.next());
+//                System.out.println(stringReader.next());
+                nutrients.add(stringReader.nextInt());
                 numOfRows++;
             }
         }
@@ -79,11 +77,14 @@ public class Field {
         Mound[][] fieldLayout = new Mound[numOfRows/numOfColumns][numOfColumns];
 
         for (int i = 0; i < fieldLayout.length; i++) {
+            int nutrientPlace = 0;
             for (int j = 0; j < fieldLayout[i].length; j++) {
-                System.out.print("M0");
+
+                fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace));
+                System.out.print("M"+ fieldLayout[i][j].getNumOfSpores() + " |");
+                nutrientPlace++;
             }
             System.out.println();
         }
-        System.out.println(11);
     }
 }
