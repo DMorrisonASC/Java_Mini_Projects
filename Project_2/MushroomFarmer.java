@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /*
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date: 4/18/2021
@@ -11,16 +16,79 @@ new mushrooms, and die off. Once there are no more mushrooms in the field, the p
 what day had the greatest number of mushrooms at once, how many mushrooms were there on that day, and
 what the nutrient levels in the field are now.
 */
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
+public class Field {
 
-public class MushroomFarmer {
-    public static void main(String[] args) throws IOException {
-        Field field = new Field();
-        field.createField();
+    public Field() {
+    }
+
+    public static void createField() throws IOException {
+        System.out.println("What's the name of the file?: ");
+        Scanner scan = new Scanner(System.in);
+        File fileName = new File(scan.nextLine());
+
+        while (fileName.exists() == false) {
+            System.out.println("File does not exist. What's the name of the file to load?: ");
+            fileName = new File(scan.nextLine());
+        }
+        Scanner myFile = new Scanner(fileName);
+
+        int numOfRows = 0;
+        int numOfColumns = 0;
+
+        int lifeSpanNum = 0;
+        int x_cord = 0;
+        int y_cord = 0;
+        ArrayList<Integer> nutrients = new ArrayList<Integer>();
+
+//
+        String line = myFile.nextLine();
+        Scanner stringReader = new Scanner(line);
+        stringReader.useDelimiter("=");
+
+        stringReader.next();
+        lifeSpanNum = stringReader.nextInt();
+
+        line = myFile.nextLine();
+        stringReader = new Scanner(line);
+        stringReader.useDelimiter("=|,");
+
+        stringReader.next();
+        x_cord = stringReader.nextInt();
+        y_cord = stringReader.nextInt();
+
+        while (myFile.hasNextLine()) {
+            line = myFile.nextLine();
+            stringReader = new Scanner(line);
+            stringReader.useDelimiter(",");
+
+//            Count amount of columns in mound
+            numOfColumns++;
+
+            while (stringReader.hasNext()) {
+//                stringReader.next();
+//                System.out.println(stringReader.next());
+                nutrients.add(stringReader.nextInt());
+                numOfRows++;
+            }
+        }
+        myFile.close();
 
 
 
+        //        Inits vars for field
+        Mound[][] fieldLayout = new Mound[numOfRows/numOfColumns][numOfColumns];
+
+        for (int i = 0; i < fieldLayout.length; i++) {
+            int nutrientPlace = 0;
+            for (int j = 0; j < fieldLayout[i].length; j++) {
+
+                fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace));
+
+                System.out.println(fieldLayout[i][j]);
+                System.out.println(nutrients.get(nutrientPlace));
+                nutrientPlace++;
+            }
+            System.out.println();
+        }
     }
 }
