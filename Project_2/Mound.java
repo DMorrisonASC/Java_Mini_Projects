@@ -68,6 +68,18 @@ public class Mound {
     public void addSpores(int sporesAdded) {
         this.numOfSpores += sporesAdded;
     }
+
+    public void growSpores() {
+        for (int i = 0; i < numOfSpores; i++) {
+            if (getNumOfNutrient() > 0 ) {
+                Mushroom growMushroom = new Mushroom(getDaysToLive());
+                mushroomsInMound.add(growMushroom);
+                setNumOfNutrient(getNumOfNutrient() - 1);
+            }
+        }
+        setNumOfSpores(getNumOfSpores() - getNumOfSpores());
+    }
+
     public void expendLife() {
         for (int i = 0; i < mushroomsInMound.size(); i++) {
             Mushroom expendMushroom = mushroomsInMound.get(i);
@@ -77,15 +89,6 @@ public class Mound {
             else {
                 mushroomsInMound.remove(mushroomsInMound.get(i));
             }
-        }
-    }
-
-    public void growSpores() {
-        for (int i = 0; i < numOfSpores; i++) {
-            setNumOfSpores(getNumOfSpores() - 1);
-
-            Mushroom growMushroom = new Mushroom(getDaysToLive());
-            mushroomsInMound.add(growMushroom);
         }
     }
 }
