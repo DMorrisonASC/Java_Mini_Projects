@@ -17,11 +17,19 @@ what day had the greatest number of mushrooms at once, how many mushrooms were t
 what the nutrient levels in the field are now.
 */
 public class Field {
+    private Mound[][] fieldLayout;
+
+    public Mound[][] getFieldLayout() {
+        return fieldLayout;
+    }
+
+    public void setFieldLayout(Mound[][] fieldLayout) {
+        this.fieldLayout = fieldLayout;
+    }
 
     public Field() {
     }
-
-    public static void createField() throws IOException {
+    public void createField() throws IOException {
         System.out.println("What's the name of the file?: ");
         Scanner scan = new Scanner(System.in);
         File fileName = new File(scan.nextLine());
@@ -30,17 +38,15 @@ public class Field {
             System.out.println("File does not exist. What's the name of the file to load?: ");
             fileName = new File(scan.nextLine());
         }
-        Scanner myFile = new Scanner(fileName);
-
+//        Init vars
         int numOfRows = 0;
         int numOfColumns = 0;
-
         int lifeSpanNum = 0;
         int x_cord = 0;
         int y_cord = 0;
         ArrayList<Integer> nutrients = new ArrayList<Integer>();
 
-//
+        Scanner myFile = new Scanner(fileName);
         String line = myFile.nextLine();
         Scanner stringReader = new Scanner(line);
         stringReader.useDelimiter("=");
@@ -65,24 +71,29 @@ public class Field {
             numOfColumns++;
 
             while (stringReader.hasNext()) {
-//                stringReader.next();
-//                System.out.println(stringReader.next());
                 nutrients.add(stringReader.nextInt());
                 numOfRows++;
             }
         }
         myFile.close();
-
-        //        Inits vars for field
-        Mound[][] fieldLayout = new Mound[numOfRows/numOfColumns][numOfColumns];
-
+        //   Create a two-dimensional array to store Mound objects in the Field
+         setFieldLayout(new Mound[numOfRows/numOfColumns][numOfColumns]);
+        int nutrientPlace = 0;
         for (int i = 0; i < fieldLayout.length; i++) {
-            int nutrientPlace = 0;
             for (int j = 0; j < fieldLayout[i].length; j++) {
-
-                fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace));
-                System.out.print("M"+ fieldLayout[i][j].getNumOfSpores() + " |");
+                fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 0, lifeSpanNum);
                 nutrientPlace++;
+            }
+            System.out.println();
+        }
+        fieldLayout[x_cord][y_cord].setNumOfSpores(1);
+        outputCurrentField();
+    }
+
+    public void outputCurrentField(){
+        for (int i = 0; i < fieldLayout.length; i++) {
+            for (int j = 0; j < fieldLayout[i].length; j++) {
+                System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " |");
             }
             System.out.println();
         }
