@@ -1,8 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /*
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date: 4/18/2021
@@ -16,101 +11,84 @@ new mushrooms, and die off. Once there are no more mushrooms in the field, the p
 what day had the greatest number of mushrooms at once, how many mushrooms were there on that day, and
 what the nutrient levels in the field are now.
 */
-public class Field {
-    private Mound[][] fieldLayout;
 
-    public Mound[][] getFieldLayout() {
-        return fieldLayout;
+import java.util.LinkedList;
+
+public class Mound {
+    private int numOfNutrient = 0;
+    private int numOfSpores = 0;
+    private int daysToLive = 0;
+    private LinkedList<Mushroom> mushroomsInMound = new LinkedList<Mushroom>();
+
+    public Mound(int nutrients) {
+        this.numOfNutrient = nutrients;
+    }
+    public Mound(int nutrients, int spores) {
+        this.numOfNutrient = nutrients;
+        this.numOfSpores = spores;
+    }
+    public Mound(int nutrients, int spores, int daysToLive) {
+        this.numOfNutrient = nutrients;
+        this.numOfSpores = spores;
+        this.daysToLive = daysToLive;
     }
 
-    public void setFieldLayout(Mound[][] fieldLayout) {
-        this.fieldLayout = fieldLayout;
+    public int getNumOfNutrient() {
+        return numOfNutrient;
     }
 
-    public Field() {
+    public void setNumOfNutrient(int numOfNutrient) {
+        this.numOfNutrient = numOfNutrient;
     }
-    public void createField() throws IOException {
-        System.out.println("What's the name of the file?: ");
-        Scanner scan = new Scanner(System.in);
-        File fileName = new File(scan.nextLine());
 
-        while (fileName.exists() == false) {
-            System.out.println("File does not exist. What's the name of the file to load?: ");
-            fileName = new File(scan.nextLine());
-        }
-//        Init vars
-        int numOfRows = 0;
-        int numOfColumns = 0;
-        int lifeSpanNum = 0;
-        int x_cord = 0;
-        int y_cord = 0;
-        ArrayList<Integer> nutrients = new ArrayList<Integer>();
+    public int getNumOfSpores() {
+        return numOfSpores;
+    }
 
-        Scanner myFile = new Scanner(fileName);
-        String line = myFile.nextLine();
-        Scanner stringReader = new Scanner(line);
-        stringReader.useDelimiter("=");
+    public void setNumOfSpores(int numOfSpores) {
+        this.numOfSpores = numOfSpores;
+    }
 
-        stringReader.next();
-        lifeSpanNum = stringReader.nextInt();
+    public int getDaysToLive() {
+        return daysToLive;
+    }
 
-        line = myFile.nextLine();
-        stringReader = new Scanner(line);
-        stringReader.useDelimiter("=|,");
+    public void setDaysToLive(int daysToLive) {
+        this.daysToLive = daysToLive;
+    }
 
-        stringReader.next();
-        x_cord = stringReader.nextInt();
-        y_cord = stringReader.nextInt();
+    public LinkedList<Mushroom> getMushroomsInMound() {
+        return mushroomsInMound;
+    }
 
-        while (myFile.hasNextLine()) {
-            line = myFile.nextLine();
-            stringReader = new Scanner(line);
-            stringReader.useDelimiter(",");
+    public void setMushroomsInMound(LinkedList<Mushroom> mushroomsInMound) {
+        this.mushroomsInMound = mushroomsInMound;
+    }
 
-//            Count amount of columns in mound
-            numOfColumns++;
+    public void addSpores(int sporesAdded) {
+        this.numOfSpores += sporesAdded;
+    }
 
-            while (stringReader.hasNext()) {
-//                stringReader.next();
-//                System.out.println(stringReader.next());
-                nutrients.add(stringReader.nextInt());
-                numOfRows++;
+    public void growSpores() {
+        for (int i = 0; i < numOfSpores; i++) {
+            if (getNumOfNutrient() > 0 ) {
+                Mushroom growMushroom = new Mushroom(getDaysToLive());
+                mushroomsInMound.add(growMushroom);
+                setNumOfNutrient(getNumOfNutrient() - 1);
             }
         }
-        myFile.close();
-        //   Create a two-dimensional array to store Mound objects in the Field
-         setFieldLayout(new Mound[numOfRows/numOfColumns][numOfColumns]);
-        for (int i = 0; i < fieldLayout.length; i++) {
-            int nutrientPlace = 0;
-            for (int j = 0; j < fieldLayout[i].length; j++) {
-                if (fieldLayout[i][j] == fieldLayout[x_cord][y_cord]) {
-                    fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 1);
-                    System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " " + fieldLayout[i][j].getNumOfNutrient() + " |");
-                }
-                else {
-                    fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 0);
-                    System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " " + fieldLayout[i][j].getNumOfNutrient() + " |");
-                }
-                nutrientPlace++;
-            }
-            System.out.println();
-        }
+        setNumOfSpores(getNumOfSpores() - getNumOfSpores());
     }
 
-//    public static void outputCurrentField(){
-//        for (int i = 0; i < fieldLayout.length; i++) {
-//            int nutrientPlace = 0;
-//            for (int j = 0; j < fieldLayout[i].length; j++) {
-//                fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 0);
-//                System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " |");
-//
-//                if (fieldLayout[i][j] == fieldLayout[x_cord][y_cord]) {
-//                    fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 1);
-//                    System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " |");
-//                }
-//                nutrientPlace++;
-//            }
-//            System.out.println();
-//        }
-//    }
+    public void expendLife() {
+        for (int i = 0; i < mushroomsInMound.size(); i++) {
+            Mushroom expendMushroom = mushroomsInMound.get(i);
+            if (expendMushroom.getDaysToLive() > 0) {
+                expendMushroom.setDaysToLive(expendMushroom.getDaysToLive() - 1);
+            }
+            else {
+                mushroomsInMound.remove(mushroomsInMound.get(i));
+            }
+        }
+    }
 }
