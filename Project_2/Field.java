@@ -82,51 +82,14 @@ public class Field {
                 nutrientPlace++;
             }
         }
-        fieldLayout[x_cord] [y_cord].setNumOfSpores(1);
+        fieldLayout[x_cord][y_cord].setNumOfSpores(1);
         fieldLayout[x_cord][y_cord].growSpores();
+        fieldLayout[x_cord][y_cord].expendLife();
+
         outputCurrentField();
     }
 
     public void oneDayPasses() {
-//        for (int i = 0; i < fieldLayout.length; i++) {
-//            for (int j = 0; j < fieldLayout[i].length; j++) {
-//                Mound eachMound = fieldLayout[i][j];
-//                eachMound.growSpores();
-//                eachMound.expendLife();
-//            }
-////            outputCurrentField();
-//        }
-//        for (int i = 0; i < fieldLayout.length; i++) {
-//            for (int j = 0; j < fieldLayout[i].length; j++) {
-//                Mound eachMound = fieldLayout[i][j];
-//                if (eachMound.getMushroomsInMound().size() == 1) {
-//                    break;
-//                }
-//            }
-//        }
-//        while (anySporeLeft() == true) {
-//            outputCurrentField();
-//            for (int i = 0; i < fieldLayout.length; i++) {
-//                for (int j = 0; j < fieldLayout[i].length; j++) {
-//                    Mound eachMound = fieldLayout[i][j];
-//                    eachMound.growSpores();
-//                    eachMound.expendLife();
-//                }
-//            }
-//        }
-//        do {
-//            for (int i = 0; i < fieldLayout.length; i++) {
-//                for (int j = 0; j < fieldLayout[i].length; j++) {
-//                    Mound eachMound = fieldLayout[i][j];
-//                    eachMound.growSpores();
-//                    eachMound.expendLife();
-////                    System.out.println(eachMound.getMushroomsInMound().size());
-//                }
-//            }
-//            outputCurrentField();
-//            System.out.println(fieldLayout[2][2].getMushroomsInMound().size());
-//        }
-//        while (anySporeLeft() == true);
         while (anySporeLeft() == true) {
             System.out.println(anySporeLeft());
             for (int i = 0; i < fieldLayout.length; i++) {
@@ -137,7 +100,6 @@ public class Field {
                 }
             }
             outputCurrentField();
-            System.out.println(fieldLayout[2][2].getMushroomsInMound().size());
         }
     }
 
@@ -158,7 +120,7 @@ public class Field {
         for (int i = 0; i < fieldLayout.length; i++) {
             for (int j = 0; j < fieldLayout[i].length; j++) {
                 Mound eachMound = fieldLayout[i][j];
-                if (eachMound.getMushroomsInMound().size() > 0) {
+                if (eachMound.getMushroomsInMound().size() > 0 || eachMound.getNumOfSpores() > 0) {
                     isSporesLeft = true;
                 }
             }
