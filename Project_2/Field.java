@@ -1,8 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /*
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date: 4/18/2021
@@ -16,6 +11,10 @@ new mushrooms, and die off. Once there are no more mushrooms in the field, the p
 what day had the greatest number of mushrooms at once, how many mushrooms were there on that day, and
 what the nutrient levels in the field are now.
 */
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Field {
     private Mound[][] fieldLayout;
 
@@ -41,9 +40,9 @@ public class Field {
 //        Init vars
         int numOfRows = 0;
         int numOfColumns = 0;
-        int lifeSpanNum = 0;
-        int x_cord = 0;
-        int y_cord = 0;
+        int lifeSpanNum;
+        int x_cord;
+        int y_cord;
         ArrayList<Integer> nutrients = new ArrayList<Integer>();
 
         Scanner myFile = new Scanner(fileName);
@@ -66,10 +65,8 @@ public class Field {
             line = myFile.nextLine();
             stringReader = new Scanner(line);
             stringReader.useDelimiter(",");
-
 //            Count amount of columns in mound
             numOfColumns++;
-
             while (stringReader.hasNext()) {
                 nutrients.add(stringReader.nextInt());
                 numOfRows++;
@@ -84,18 +81,74 @@ public class Field {
                 fieldLayout[i][j] = new Mound(nutrients.get(nutrientPlace), 0, lifeSpanNum);
                 nutrientPlace++;
             }
-            System.out.println();
         }
         fieldLayout[x_cord][y_cord].setNumOfSpores(1);
         outputCurrentField();
+        System.out.println("a");
+    }
+
+    public void oneDayPasses() {
+//        for (int i = 0; i < fieldLayout.length; i++) {
+//            for (int j = 0; j < fieldLayout[i].length; j++) {
+//                Mound eachMound = fieldLayout[i][j];
+//                eachMound.growSpores();
+//                eachMound.expendLife();
+//            }
+////            outputCurrentField();
+//        }
+//        for (int i = 0; i < fieldLayout.length; i++) {
+//            for (int j = 0; j < fieldLayout[i].length; j++) {
+//                Mound eachMound = fieldLayout[i][j];
+//                if (eachMound.getMushroomsInMound().size() == 1) {
+//                    break;
+//                }
+//            }
+//        }
+//        while (anySporeLeft() == true) {
+//            outputCurrentField();
+//            for (int i = 0; i < fieldLayout.length; i++) {
+//                for (int j = 0; j < fieldLayout[i].length; j++) {
+//                    Mound eachMound = fieldLayout[i][j];
+//                    eachMound.growSpores();
+//                    eachMound.expendLife();
+//                }
+//            }
+//        }
+        do {
+            for (int i = 0; i < fieldLayout.length; i++) {
+                for (int j = 0; j < fieldLayout[i].length; j++) {
+                    Mound eachMound = fieldLayout[i][j];
+                    eachMound.growSpores();
+                    eachMound.expendLife();
+                }
+            }
+            outputCurrentField();
+        }
+        while (anySporeLeft() == true);
     }
 
     public void outputCurrentField(){
         for (int i = 0; i < fieldLayout.length; i++) {
             for (int j = 0; j < fieldLayout[i].length; j++) {
-                System.out.print("M" + fieldLayout[i][j].getNumOfSpores() + " |");
+                System.out.print("M" + fieldLayout[i][j].getMushroomsInMound().size() + " |");
             }
+//            Print separates each row. Ex: 5x5, 6x6, etc.
             System.out.println();
         }
+//        Print gives each mound
+        System.out.println();
+    }
+
+    public boolean anySporeLeft() {
+        boolean isSporesLeft = false;
+        for (int i = 0; i < fieldLayout.length; i++) {
+            for (int j = 0; j < fieldLayout[i].length; j++) {
+                Mound eachMound = fieldLayout[i][j];
+                if (eachMound.getNumOfSpores() > 0) {
+                    isSporesLeft = true;
+                }
+            }
+        }
+        return isSporesLeft;
     }
 }
