@@ -85,6 +85,7 @@ public class Mound {
             Mushroom expendMushroom = mushroomsInMound.get(i);
             if (expendMushroom.getDaysToLive() > 0) {
                 expendMushroom.setDaysToLive(expendMushroom.getDaysToLive() - 1);
+//                System.out.println(expendMushroom.getDaysToLive());
             }
             else {
                 mushroomsInMound.remove(mushroomsInMound.get(i));
