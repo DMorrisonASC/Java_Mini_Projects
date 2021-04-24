@@ -91,12 +91,47 @@ public class Field {
 
     public void oneDayPasses() {
         while (anySporeLeft() == true) {
-            System.out.println(anySporeLeft());
             for (int i = 0; i < fieldLayout.length; i++) {
                 for (int j = 0; j < fieldLayout[i].length; j++) {
                     Mound eachMound = fieldLayout[i][j];
                     eachMound.growSpores();
                     eachMound.expendLife();
+//                    if (isDeath) {
+////                        Add a spore north of the mushroom when it dies
+//                        fieldLayout[i-1][j].addSpores(1);
+////                        Add a spore south of the mushroom when it dies
+//                        fieldLayout[i+1][j].addSpores(1);
+////                        Add a spore east of the mushroom when it dies
+//                        fieldLayout[i][j+1].addSpores(1);
+////                        Add a spore west of the mushroom when it dies
+//                        fieldLayout[i+1][j-1].addSpores(1);
+//                    }
+                }
+            }
+            for (int i = 0; i < fieldLayout.length; i++) {
+                for (int j = 0; j < fieldLayout[i].length; j++) {
+                    Mound eachMoundOfShroom = fieldLayout[i][j];
+
+                    if (eachMoundOfShroom.getMushroomsInMound().size() > 0) {
+                        if (eachMoundOfShroom.getMushroomsInMound().get(0).getDaysToLive() == 0) {
+//                        Add a spore north of the mushroom when it dies IF it's not out of bounds
+                            if ((i - 1) > -1) {
+                                fieldLayout[i - 1][j].addSpores(1);
+                            }
+                            if ((i + 1) < fieldLayout.length) {
+//                        Add a spore south of the mushroom when it dies IF it's not out of bounds
+                                fieldLayout[i + 1][j].addSpores(1);
+                            }
+                            if ((j + 1) > fieldLayout.length) {
+//                        Add a spore east of the mushroom when it dies IF it's not out of bounds
+                                fieldLayout[i][j + 1].addSpores(1);
+                            }
+                            if ((j - 1) > -1) {
+//                        Add a spore west of the mushroom when it dies IF it's not out of bounds
+                                fieldLayout[i][j - 1].addSpores(1);
+                            }
+                        }
+                    }
                 }
             }
             outputCurrentField();
