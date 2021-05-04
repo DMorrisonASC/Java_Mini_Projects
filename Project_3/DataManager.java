@@ -35,27 +35,43 @@ public class DataManager {
         inputID = scan.nextInt();
         Item foundItem = itemHashMap.get(inputID);
         System.out.println(foundItem.getName());
-//        Keep asking until a correct ID number is given
-        while (itemHashMap.get(inputID) == null) {
+/* If the ID does not exist in the HashMap, an appropriate message should be
+output to the user
+*/
+        if (itemHashMap.get(inputID) == null) {
             System.out.println("Not item on file with that ID. Try again: ");
-
-            System.out.println("What's the item's ID#?: ");
-            inputID = scan.nextInt();
-
-            foundItem = itemHashMap.get(inputID);
         }
-
+/* If the ID exists in the HashMap the Item’s information, including its current
+number of copies, should be output to the user with an appropriate message */
         if (foundItem instanceof Book) {
-            System.out.println("I found a book");
+//                    8,Book,Where the Sidewalk Ends,Shel Silverstein,Poetry,176,0
+            System.out.println("ID: " + foundItem.getID());
+            System.out.println("Type: " + foundItem.getType());
+            System.out.println("Name: " + foundItem.getName());
+            System.out.println("Author: " + ((Book) foundItem).getAuthorName());
+            System.out.println("Genre: " + foundItem.getGenre());
+            System.out.println("Number of pages: " + ((Book) foundItem).getNumPages());
+            System.out.println("Copies available: " + foundItem.getCopies());
         }
         else if (foundItem instanceof Music) {
-            System.out.println("I found a music");
-
+//68,Music,Pet Sounds,The Beach Boys,Beach Rock,13,2
+            System.out.println("ID: " + foundItem.getID());
+            System.out.println("Type: " + foundItem.getType());
+            System.out.println("Name: " + foundItem.getName());
+            System.out.println("Artist: " + ((Music) foundItem).getArtist());
+            System.out.println("Genre: " + foundItem.getGenre());
+            System.out.println("Number of songs: " + ((Music) foundItem).getNumSongs());
+            System.out.println("Copies available: " + foundItem.getCopies());
         }
         else if (foundItem instanceof Movie) {
-            System.out.println("I found a movie");
+//            6,Movie,Titanic,Drama,194,0
+            System.out.println("ID: " + foundItem.getID());
+            System.out.println("Type: " + foundItem.getType());
+            System.out.println("Name: " + foundItem.getName());
+            System.out.println("Genre: " + foundItem.getGenre());
+            System.out.println("Movie Length: " + ((Movie) foundItem).getLengthMin());
+            System.out.println("Copies available: " + foundItem.getCopies());
         }
-
     }
 
     public void loadInventory() throws IOException {
