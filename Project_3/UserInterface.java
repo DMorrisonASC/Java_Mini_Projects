@@ -29,16 +29,16 @@ public class UserInterface {
 
             switch (choice){
                 case 1:
-                    System.out.println("Yes, memes!");
+                    dataManager.checkInItem();
                     break;
                 case 2:
-                    System.out.println("Yes, memes!");
+                    dataManager.checkOutItem();
                     break;
                 case 3:
                     dataManager.searchInventory();
                     break;
                 case 4:
-                    System.out.println("Yes, memes!");
+                    dataManager.outPutAllType();
                     break;
                 case 5:
                     dataManager.loadInventory();
@@ -47,7 +47,7 @@ public class UserInterface {
                     System.out.println("Yes, memes!");
                     break;
                 case 7:
-                    System.out.println("Yes, memes!");
+                    System.out.println("Ending program...bye!");
                     keepGoing = false;
                     break;
             }
@@ -55,4 +55,3 @@ public class UserInterface {
         }
     }
 }
- 
