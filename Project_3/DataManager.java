@@ -23,11 +23,9 @@ public class DataManager {
     LinkedList<Music> musicLinkedList = new LinkedList<Music>();
     LinkedList<Movie> movieLinkedList = new LinkedList<Movie>();
 
-    public DataManager(){
+    public DataManager(){}
 
-    }
-
-    public void searchInventory() {
+    public void checkInItem() {
         Scanner scan = new Scanner(System.in);
         int inputID = 0;
 
@@ -40,6 +38,67 @@ output to the user
 */
         if (itemHashMap.get(inputID) == null) {
             System.out.println("Not item on file with that ID. Try again: ");
+        }
+/* If the ID exists in the HashMap the number of copies should increase by 1 and
+an appropriate message should be output to the user.
+*/
+        if (foundItem instanceof Book) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+        else if (foundItem instanceof Music) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+        else if (foundItem instanceof Movie) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+    }
+
+    public void checkOutItem() {
+        Scanner scan = new Scanner(System.in);
+        int inputID = 0;
+
+        System.out.println("What's the item's ID#?: ");
+        inputID = scan.nextInt();
+        Item foundItem = itemHashMap.get(inputID);
+        System.out.println(foundItem.getName());
+/* If the ID does not exist in the HashMap, an appropriate message should be
+output to the user
+*/
+        if (itemHashMap.get(inputID) == null) {
+            System.out.println("Not item on file with that ID. Try again: ");
+        }
+/* If the ID exists in the HashMap the number of copies should increase by 1 and
+an appropriate message should be output to the user.
+*/
+        if (foundItem instanceof Book) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+        else if (foundItem instanceof Music) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+        else if (foundItem instanceof Movie) {
+            foundItem.setCopies(foundItem.getCopies() - 1);
+            System.out.println("You check in " + foundItem.getName());
+        }
+    }
+
+    public void searchInventory() {
+        Scanner scan = new Scanner(System.in);
+        int inputID;
+
+        System.out.println("What's the item's ID#?: ");
+        inputID = scan.nextInt();
+        Item foundItem = itemHashMap.get(inputID);
+/* If the ID does not exist in the HashMap, an appropriate message should be
+output to the user
+*/
+        if (itemHashMap.get(inputID) == null) {
+            System.out.println("No item on file with that ID. ");
         }
 /* If the ID exists in the HashMap the Item’s information, including its current
 number of copies, should be output to the user with an appropriate message */
@@ -73,7 +132,49 @@ number of copies, should be output to the user with an appropriate message */
             System.out.println("Copies available: " + foundItem.getCopies());
         }
     }
+    public void outPutAllType()  {
+        Scanner scan = new Scanner(System.in);
+        String inputType;
 
+        System.out.println("Output all books, musics or movies?: ");
+        inputType = scan.nextLine();
+
+        if (inputType.equals("Book")) {
+            for (Item eachItem : itemHashMap.values()) {
+                if (eachItem instanceof Book) {
+                    System.out.println("ID: " + eachItem.getID());
+                    System.out.println("Type: " + eachItem.getType());
+                    System.out.println("Name: " + eachItem.getName());
+                    System.out.println("Author: " + ((Book) eachItem).getAuthorName());
+                    System.out.println("Genre: " + eachItem.getGenre());
+                    System.out.println("Number of pages: " + ((Book) eachItem).getNumPages());
+                    System.out.println("Copies available: " + eachItem.getCopies());
+                    System.out.println("------------------- ");
+                }
+            }
+
+        }
+        else if (inputType.equals("Music")) {
+
+        }
+        else if (inputType.equals("Movie")) {
+
+        }
+
+
+    }
+/*  A method that allows the user to load a file that contains the library’s current inventory of
+Items
+▪ This method should prompt the user for the name of the file and take appropriate
+actions to setup the file for reading
+▪ Each line in the file will contain one Item and will be formatted as follows
+• A line that contains a book will be formatted as:
+o ID,Type,BookName,Author,Genre,NumPages,Copies
+• A line that contains music will be formatted as:
+o ID,Type,AlbumName,Artist,Genre,NumSongs,Copies
+• A line that contains a movie will be formatted as:
+o ID,Type,MovieName,Genre,LengthMin,Copies
+• Type represents the type of Item, and can be either “Book”, “Music”, or “Movie” */
     public void loadInventory() throws IOException {
         System.out.println("What's the name of the file?: ");
         Scanner scan = new Scanner(System.in);
