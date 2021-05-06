@@ -103,7 +103,6 @@ output to the user
 /* If the ID exists in the HashMap the Item’s information, including its current
 number of copies, should be output to the user with an appropriate message */
         if (foundItem instanceof Book) {
-//                    8,Book,Where the Sidewalk Ends,Shel Silverstein,Poetry,176,0
             System.out.println("ID: " + foundItem.getID());
             System.out.println("Type: " + foundItem.getType());
             System.out.println("Name: " + foundItem.getName());
@@ -139,29 +138,43 @@ number of copies, should be output to the user with an appropriate message */
         System.out.println("Output all books, musics or movies?: ");
         inputType = scan.nextLine();
 
-        if (inputType.equals("Book")) {
-            for (Item eachItem : itemHashMap.values()) {
-                if (eachItem instanceof Book) {
-                    System.out.println("ID: " + eachItem.getID());
-                    System.out.println("Type: " + eachItem.getType());
-                    System.out.println("Name: " + eachItem.getName());
-                    System.out.println("Author: " + ((Book) eachItem).getAuthorName());
-                    System.out.println("Genre: " + eachItem.getGenre());
-                    System.out.println("Number of pages: " + ((Book) eachItem).getNumPages());
-                    System.out.println("Copies available: " + eachItem.getCopies());
-                    System.out.println("------------------- ");
-                }
+        if (inputType.toLowerCase().startsWith("b")) {
+            for (Item eachItem : bookLinkedList) {
+                System.out.println("ID: " + eachItem.getID());
+                System.out.println("Type: " + eachItem.getType());
+                System.out.println("Name: " + eachItem.getName());
+                System.out.println("Author: " + ((Book) eachItem).getAuthorName());
+                System.out.println("Genre: " + eachItem.getGenre());
+                System.out.println("Number of pages: " + ((Book) eachItem).getNumPages());
+                System.out.println("Copies available: " + eachItem.getCopies());
+                System.out.println("-------------------");
             }
 
         }
-        else if (inputType.equals("Music")) {
-
+        else if (inputType.toLowerCase().startsWith("mu")) {
+            for (Item eachItem : musicLinkedList) {
+                System.out.println("ID: " + eachItem.getID());
+                System.out.println("Type: " + eachItem.getType());
+                System.out.println("Name: " + eachItem.getName());
+                System.out.println("Artist: " + ((Music) eachItem).getArtist());
+                System.out.println("Genre: " + eachItem.getGenre());
+                System.out.println("Number of songs: " + ((Music) eachItem).getNumSongs());
+                System.out.println("Copies available: " + eachItem.getCopies());
+                System.out.println("-------------------");
+            }
         }
-        else if (inputType.equals("Movie")) {
 
+        else if (inputType.toLowerCase().startsWith("mo")) {
+            for (Item eachItem : movieLinkedList) {
+                System.out.println("ID: " + eachItem.getID());
+                System.out.println("Type: " + eachItem.getType());
+                System.out.println("Name: " + eachItem.getName());
+                System.out.println("Genre: " + eachItem.getGenre());
+                System.out.println("Movie Length: " + ((Movie) eachItem).getLengthMin());
+                System.out.println("Copies available: " + eachItem.getCopies());
+                System.out.println("-------------------");
+            }
         }
-
-
     }
 /*  A method that allows the user to load a file that contains the library’s current inventory of
 Items
@@ -199,7 +212,6 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
 //            System.out.println(typeOfItem);
 
             if (typeOfItem.equals("Book")) {
-//                63,Book,Animal Farm,George Orwell,Satire,122,2
               int ID = stringReader.nextInt();
               stringReader.next();
               String name = stringReader.next();
@@ -213,7 +225,6 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
               itemHashMap.put(ID, oneBook);
             }
             else if (typeOfItem.equals("Music")){
-//                23,Music,Thriller,Michael Jackson,Pop,9,3
                 int ID = stringReader.nextInt();
                 stringReader.next();
                 String name = stringReader.next();
@@ -227,7 +238,6 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
                 itemHashMap.put(ID, oneMusic);
             }
             else if (typeOfItem.equals("Movie")){
-//                82,Movie,Sunset Blvd,Drama,110,1
                 int ID = stringReader.nextInt();
                 stringReader.next();
                 String name = stringReader.next();
