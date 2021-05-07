@@ -12,6 +12,7 @@ once the initial inventory file is loaded in.
  */
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -43,16 +44,16 @@ output to the user
 an appropriate message should be output to the user.
 */
         if (foundItem instanceof Book) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            foundItem.setCopies(foundItem.getCopies() + 1);
+            System.out.println("You checked in " + foundItem.getName());
         }
         else if (foundItem instanceof Music) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            foundItem.setCopies(foundItem.getCopies() + 1);
+            System.out.println("You checked in " + foundItem.getName());
         }
         else if (foundItem instanceof Movie) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            foundItem.setCopies(foundItem.getCopies() + 1);
+            System.out.println("You checked in " + foundItem.getName());
         }
     }
 
@@ -74,16 +75,31 @@ output to the user
 an appropriate message should be output to the user.
 */
         if (foundItem instanceof Book) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            if (foundItem.getCopies() > 0) {
+                foundItem.setCopies(foundItem.getCopies() - 1);
+                System.out.println("You checked out " + foundItem.getName());
+            }
+            else {
+                System.out.println("Item is currently unavailable");
+            }
         }
         else if (foundItem instanceof Music) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            if (foundItem.getCopies() > 0) {
+                foundItem.setCopies(foundItem.getCopies() - 1);
+                System.out.println("You checked out " + foundItem.getName());
+            }
+            else {
+                System.out.println("Item is currently unavailable");
+            }
         }
         else if (foundItem instanceof Movie) {
-            foundItem.setCopies(foundItem.getCopies() - 1);
-            System.out.println("You check in " + foundItem.getName());
+            if (foundItem.getCopies() > 0) {
+                foundItem.setCopies(foundItem.getCopies() - 1);
+                System.out.println("You checked out " + foundItem.getName());
+            }
+            else {
+                System.out.println("Item is currently unavailable");
+            }
         }
     }
 
@@ -112,7 +128,6 @@ number of copies, should be output to the user with an appropriate message */
             System.out.println("Copies available: " + foundItem.getCopies());
         }
         else if (foundItem instanceof Music) {
-//68,Music,Pet Sounds,The Beach Boys,Beach Rock,13,2
             System.out.println("ID: " + foundItem.getID());
             System.out.println("Type: " + foundItem.getType());
             System.out.println("Name: " + foundItem.getName());
@@ -122,7 +137,6 @@ number of copies, should be output to the user with an appropriate message */
             System.out.println("Copies available: " + foundItem.getCopies());
         }
         else if (foundItem instanceof Movie) {
-//            6,Movie,Titanic,Drama,194,0
             System.out.println("ID: " + foundItem.getID());
             System.out.println("Type: " + foundItem.getType());
             System.out.println("Name: " + foundItem.getName());
@@ -139,38 +153,38 @@ number of copies, should be output to the user with an appropriate message */
         inputType = scan.nextLine();
 
         if (inputType.toLowerCase().startsWith("b")) {
-            for (Item eachItem : bookLinkedList) {
+            for (Book eachItem : bookLinkedList) {
                 System.out.println("ID: " + eachItem.getID());
                 System.out.println("Type: " + eachItem.getType());
                 System.out.println("Name: " + eachItem.getName());
-                System.out.println("Author: " + ((Book) eachItem).getAuthorName());
+                System.out.println("Author: " + eachItem.getAuthorName());
                 System.out.println("Genre: " + eachItem.getGenre());
-                System.out.println("Number of pages: " + ((Book) eachItem).getNumPages());
+                System.out.println("Number of pages: " + eachItem.getNumPages());
                 System.out.println("Copies available: " + eachItem.getCopies());
                 System.out.println("-------------------");
             }
 
         }
         else if (inputType.toLowerCase().startsWith("mu")) {
-            for (Item eachItem : musicLinkedList) {
+            for (Music eachItem : musicLinkedList) {
                 System.out.println("ID: " + eachItem.getID());
                 System.out.println("Type: " + eachItem.getType());
                 System.out.println("Name: " + eachItem.getName());
-                System.out.println("Artist: " + ((Music) eachItem).getArtist());
+                System.out.println("Artist: " + eachItem.getArtist());
                 System.out.println("Genre: " + eachItem.getGenre());
-                System.out.println("Number of songs: " + ((Music) eachItem).getNumSongs());
+                System.out.println("Number of songs: " + eachItem.getNumSongs());
                 System.out.println("Copies available: " + eachItem.getCopies());
                 System.out.println("-------------------");
             }
         }
 
         else if (inputType.toLowerCase().startsWith("mo")) {
-            for (Item eachItem : movieLinkedList) {
+            for (Movie eachItem : movieLinkedList) {
                 System.out.println("ID: " + eachItem.getID());
                 System.out.println("Type: " + eachItem.getType());
                 System.out.println("Name: " + eachItem.getName());
                 System.out.println("Genre: " + eachItem.getGenre());
-                System.out.println("Movie Length: " + ((Movie) eachItem).getLengthMin());
+                System.out.println("Movie Length: " + eachItem.getLengthMin());
                 System.out.println("Copies available: " + eachItem.getCopies());
                 System.out.println("-------------------");
             }
@@ -254,5 +268,28 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
             }
         }
         myFile.close();
+    }
+    public void saveInventory () throws IOException {
+//      Output the following information to requested file.
+        System.out.println("What's the name of the file?: ");
+        Scanner scan = new Scanner(System.in);
+        PrintWriter myWriter = new PrintWriter(scan.nextLine());
+//        Save a file that contains the library’s current inventory of Items
+        for (Book eachItem : bookLinkedList) {
+//            63,Book,Animal Farm,George Orwell,Satire,122,2
+            myWriter.println(eachItem.getID() + "," + eachItem.getType() + "," +
+                    eachItem.getName() + "," + eachItem.getAuthorName()  + "," +
+                    eachItem.getGenre() + "," + eachItem.getNumPages() + "," +
+                    eachItem.getCopies()
+            );
+        }
+
+        for (Music eachItem : musicLinkedList) {
+            myWriter.println("ID: " + eachItem.getID() + "," + "Type: " + eachItem.getType() + "," +
+                            eachItem.getName() + "," + eachItem.getArtist() + "," + eachItem.getGenre()
+                            + "," + eachItem.getNumSongs() + "," + eachItem.getCopies()
+            );
+        }
+        myWriter.close();
     }
 }
