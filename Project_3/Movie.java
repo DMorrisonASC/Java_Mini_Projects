@@ -6,20 +6,30 @@
 inventory. This is be a simple database and does not allow querying, but will still contain a primary index and
 second indices to store, retrieve, and modify the data in the database.
  */
-public class Movie extends Item {
-    private double lengthMin;
+public class Music extends Item {
+    private String artist;
+    private int numSongs;
 
-    Movie (int ID, String type, String name, String genre, int copies, double lengthMin) {
+    Music (int ID, String type, String name, String genre, int copies, String artist, int numSongs) {
         super(ID, type, name, genre, copies);
 
-        this.lengthMin = lengthMin;
+        this.artist = artist;
+        this.numSongs = numSongs;
     }
 
-    public double getLengthMin() {
-        return lengthMin;
+    public String getArtist() {
+        return artist;
     }
 
-    public void setLengthMin(double lengthMin) {
-        this.lengthMin = lengthMin;
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public int getNumSongs() {
+        return numSongs;
+    }
+
+    public void setNumSongs(int numSongs) {
+        this.numSongs = numSongs;
     }
 }
