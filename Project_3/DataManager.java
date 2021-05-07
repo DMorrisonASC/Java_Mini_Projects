@@ -145,6 +145,12 @@ number of copies, should be output to the user with an appropriate message */
             System.out.println("Copies available: " + foundItem.getCopies());
         }
     }
+    /*  A method that allows the user to see all of the Items of a particular type that the library
+current keeps track of
+▪ This method should prompt the user for which type of Item they wish to see and
+output all of the information for each of Items in the appropriate secondary index, in
+an easy to read format with appropriate headers for each piece of information
+    */
     public void outPutAllType()  {
         Scanner scan = new Scanner(System.in);
         String inputType;
@@ -165,6 +171,7 @@ number of copies, should be output to the user with an appropriate message */
             }
 
         }
+
         else if (inputType.toLowerCase().startsWith("mu")) {
             for (Music eachItem : musicLinkedList) {
                 System.out.println("ID: " + eachItem.getID());
@@ -223,7 +230,6 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
 //          First, check if line is a book, music, or movie
             typeReader.next();
             String typeOfItem = typeReader.next();
-//            System.out.println(typeOfItem);
 
             if (typeOfItem.equals("Book")) {
               int ID = stringReader.nextInt();
@@ -269,7 +275,8 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
         }
         myFile.close();
     }
-    public void saveInventory () throws IOException {
+//    A method that allows the user to save a file that contains the library’s current inventory of Items
+    public void saveInventory() throws IOException {
 //      Output the following information to requested file.
         System.out.println("What's the name of the file?: ");
         Scanner scan = new Scanner(System.in);
