@@ -256,7 +256,7 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
                 stringReader.next();
                 String name = stringReader.next();
                 String genre = stringReader.next();
-                double lengthMin = stringReader.nextDouble();
+                int lengthMin = stringReader.nextInt();
                 int copies = stringReader.nextInt();
 
                 Movie oneMovie = new Movie(ID, typeOfItem, name, genre, copies, lengthMin);
@@ -276,18 +276,21 @@ o ID,Type,MovieName,Genre,LengthMin,Copies
         PrintWriter myWriter = new PrintWriter(scan.nextLine());
 //        Save a file that contains the library’s current inventory of Items
         for (Book eachItem : bookLinkedList) {
-//            63,Book,Animal Farm,George Orwell,Satire,122,2
             myWriter.println(eachItem.getID() + "," + eachItem.getType() + "," +
                     eachItem.getName() + "," + eachItem.getAuthorName()  + "," +
                     eachItem.getGenre() + "," + eachItem.getNumPages() + "," +
                     eachItem.getCopies()
             );
         }
-
         for (Music eachItem : musicLinkedList) {
-            myWriter.println("ID: " + eachItem.getID() + "," + "Type: " + eachItem.getType() + "," +
+            myWriter.println(eachItem.getID() + "," + eachItem.getType() + "," +
                             eachItem.getName() + "," + eachItem.getArtist() + "," + eachItem.getGenre()
                             + "," + eachItem.getNumSongs() + "," + eachItem.getCopies()
+            );
+        }
+        for (Movie eachItem : movieLinkedList) {
+            myWriter.println(eachItem.getID() + "," + eachItem.getType() + "," + eachItem.getName() + "," +
+                            eachItem.getGenre() + "," + eachItem.getLengthMin() + "," + eachItem.getCopies()
             );
         }
         myWriter.close();
