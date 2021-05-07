@@ -17,7 +17,7 @@ public class UserInterface {
 
         System.out.println("Welcome to Trexler Library!\n---------------------------");
         while (keepGoing) {
-            System.out.println("Menu: \n1) Check-out an item \n2) Check-in an item " +
+            System.out.println("Menu: \n1) Check-in an item \n2) Check-out an item " +
                     "\n3) Checking item availability \n4) List all information for a particular type of item " +
                     "\n5) Load the inventory file \n6) Save the inventory file \n7) Exit the program \n");
             int choice = scan.nextInt();
@@ -44,7 +44,7 @@ public class UserInterface {
                     dataManager.loadInventory();
                     break;
                 case 6:
-                    System.out.println("Yes, memes!");
+                    dataManager.saveInventory();
                     break;
                 case 7:
                     System.out.println("Ending program...bye!");
