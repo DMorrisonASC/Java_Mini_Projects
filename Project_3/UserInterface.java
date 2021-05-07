@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     public static void main(String[] args) throws IOException {
-        DataManager dataManager = new DataManager();
+        DataManager dataManager = new DataManager(); // Contain an instance of a DataManager object
         boolean keepGoing = true;
         Scanner scan = new Scanner(System.in);
 
@@ -51,7 +51,6 @@ public class UserInterface {
                     keepGoing = false;
                     break;
             }
-
         }
     }
 }
